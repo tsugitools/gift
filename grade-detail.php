@@ -1,10 +1,10 @@
 <?php
 require_once "../config.php";
-\Tsugi\Core\LTIX::getConnection();
 
+use \Tsugi\Core\LTIX;
 use \Tsugi\Grades\GradeUtil;
 
-session_start();
+$LAUNCH = LTIX::requireData();
 
 // Get the user's grade data also checks session
 $row = GradeUtil::gradeLoad($_REQUEST['user_id']);
@@ -18,12 +18,12 @@ $OUTPUT->flashMessages();
 GradeUtil::gradeShowInfo($row);
 
 // Unique detail
-echo("<p>Submitted URL:</p>\n");
 $json = json_decode($row['json']);
-if ( is_object($json) && isset($json->url)) {
-    echo("<p><a href=\"".safe_href($json->url)."\" target=\"_new\">");;
-    echo(htmlent_utf8($json->url));
-    echo("</a></p>\n");
+if ( is_object($json) ) {
+    echo("<p>JSON:</p>\n");
+    echo("<pre>\n");
+    echo(htmlentities(json_encode($json, JSON_PRETTY_PRINT)));
+    echo("\n</pre>\n");
 }
 
 $OUTPUT->footer();

@@ -75,6 +75,9 @@ if ( count($_POST) > 0 ) {
         return;
     }
 
+    $result = array("when" => time(), "tries" => $tries+1, "submit" => $_POST);
+    $RESULT->setJson(json_encode($result));
+
     $_SESSION['gift_submit'] = $_POST;
     $quiz = make_quiz($_POST, $questions, $errors);
 
@@ -88,9 +91,6 @@ if ( count($_POST) > 0 ) {
         $scorestr = "New score of ".percent($gradetosend)." is < than previous grade of ".percent($oldgrade).", previous grade kept";
         $gradetosend = $oldgrade;
     }
-
-    $result = array("when" => time(), "tries" => $tries+1, "submit" => $_POST);
-    $RESULT->setJson(json_encode($result));
 
     // Use LTIX to send the grade back to the LMS.
     $debug_log = array();
@@ -115,6 +115,7 @@ if ( count($_POST) > 0 ) {
 // View
 $OUTPUT->header();
 $OUTPUT->bodyStart();
+$OUTPUT->topNav();
 
 // Settings button and dialog
 
@@ -132,7 +133,6 @@ SettingsForm::start();
 SettingsForm::text('tries',__('The number of tries allowed for this quiz.  Leave blank or set to 1 for a single try.'));
 SettingsForm::text('delay',__('The number of seconds between retries.  Leave blank or set to zero to allow immediate retries.'));
 SettingsForm::dueDate();
-SettingsForm::done();
 SettingsForm::end();
 
 $OUTPUT->welcomeUserCourse();
