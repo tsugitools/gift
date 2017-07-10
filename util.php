@@ -45,3 +45,4 @@ function libxml_display_error($error)
 
     return $return; 
 } 
+

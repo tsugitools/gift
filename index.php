@@ -19,6 +19,11 @@ if ( SettingsForm::handleSettingsPost() ) {
     return;
 }
 
+// Remember the default file name
+if ( isset($_GET['quiz']) && $USER->instructor ) {
+    $_SESSION['default_quiz'] = $_GET['quiz'];
+}
+
 // Get the settings
 $max_tries = Settings::linkGet('tries')+0;
 if ( $max_tries < 1 ) $max_tries = 1;

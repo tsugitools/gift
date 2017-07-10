@@ -13,29 +13,14 @@ if ( ! $USER->instructor ) die("Requires instructor role");
 // Model
 $p = $CFG->dbprefix;
 
+// If they pressed Submit on the quiz content
 if ( isset($_POST['gift']) ) {
     $gift = $_POST['gift'];
-    if ( get_magic_quotes_gpc() ) $gift = stripslashes($gift);
     $_SESSION['gift'] = $gift;
 
     // Some sanity checking...
-    $questions = array();
-    $errors = array();
-    parse_gift($gift, $questions, $errors);
-
-    if ( count($questions) < 1 ) {
-        $_SESSION['error'] = "No valid questions found in input data";
-        header( 'Location: '.addSession('configure.php') ) ;
-        return;
-    }
-
-    if ( count($errors) > 0 ) {
-        $msg = "Errors in GIFT data: ";
-        $i = 1;
-        foreach ( $errors as $error ) {
-            $msg .= " ($i) ".$error;
-        }
-        $_SESSION['error'] = $msg;
+    $retval = check_gift($gift);
+    if ( ! $retval ) {
         header( 'Location: '.addSession('configure.php') ) ;
         return;
     }
@@ -48,7 +33,64 @@ if ( isset($_POST['gift']) ) {
     return;
 }
 
-// Load up the quiz
+// Check to see if we are supposed to preload a quiz
+$files = false;
+$lock = false;
+if ( isset ($CFG->giftquizzes) && is_dir($CFG->giftquizzes) ) {
+    $files1 = scandir($CFG->giftquizzes);
+    $files = array();
+    foreach($files1 as $file) {
+        if ( $file == '.lock' ) {
+            $lock = trim(file_get_contents($CFG->giftquizzes.'/'.$file));
+            continue;
+        }
+        if ( strpos($file, '.') === 0 ) continue;
+        $files[] = $file;
+    }
+}
+sort($files);
+if ( count($files) < 1 ) {
+    $_SESSION['error'] = "Found no files in ".$CFG->giftquizzes;
+    header( 'Location: '.addSession('configure.php') ) ;
+    return;
+}
+// print_r($files);
+// echo("LOCK = ".$lock);
+
+$default = isset($_SESSION['default_quiz']) ? $_SESSION['default_quiz'] : false;
+
+// Load up the selected file
+if ( $files && isset($_POST['file']) ) {
+    $key = isset($_POST['lock']) ? $_POST['lock'] : false;
+    if ( $lock && $lock != $key ) {
+        $_SESSION['error'] = 'Incorrect password';
+        header( 'Location: '.addSession('configure.php') ) ;
+        return;
+    }
+
+    $name = $_POST['file'];
+    if ( ! in_array($name, $files) ) {
+        $_SESSION['error'] = 'Quiz file not found: '.$_POST['file'];
+        header( 'Location: '.addSession('configure.php') ) ;
+        return;
+    }
+
+    $gift = file_get_contents($CFG->giftquizzes.'/'.$name);
+    $_SESSION['gift'] = $gift;
+
+    // Also pre-check for sanity
+    $retval = check_gift($gift);
+    if ( ! $retval ) {
+        header( 'Location: '.addSession('configure.php') ) ;
+        return;
+    }
+
+    $_SESSION['success'] = 'Loaded quiz content from file.';
+    header( 'Location: '.addSession('configure.php') ) ;
+    return;
+}
+
+// Load up the quiz from session or DB
 if ( isset($_SESSION['gift']) ) { 
     $gift = $_SESSION['gift'];
     unset($_SESSION['gift']);
@@ -57,21 +99,44 @@ if ( isset($_SESSION['gift']) ) {
 }
 
 // Clean up the JSON for presentation
-if ( $gift === false || strlen($gift) < 1 ) $gift = getSampleGIFT();
+if ( $gift === false || strlen($gift) < 1 ) {
+    if ( $default != false && $lock == false && in_array($default, $files) ) {
+        $gift = file_get_contents($CFG->giftquizzes.'/'.$default);
+        $_SESSION['success'] = 'Loaded quiz '.$default.' as default';
+    } else {
+        $gift = getSampleGIFT();
+    }
+}
 
 // View
 $OUTPUT->header();
 $OUTPUT->bodyStart();
 $OUTPUT->flashMessages();
-
 ?>
 <p>Be careful in making any changes if this quiz has submissions.</p>
+<?php 
+if ( $files !== false ) {
+echo("<form method=\"post\">\n");
+// echo('<select name="file" onchange="console.dir(this); if(this.value!=0) this.form.submit();">'."\n");
+echo('<select name="file">'."\n");
+echo('<option value="0">Select Quiz</option>'."\n");
+foreach($files as $file) {
+    if ( $default && $default == $file ) {
+        echo('<option value="'.htmlentities($file).'" selected>'.htmlentities($file).'</option>'."\n");
+    } else {
+        echo('<option value="'.htmlentities($file).'">'.htmlentities($file).'</option>'."\n");
+    }
+}
+echo("</select>\n");
+if ( $lock != false ) {
+    echo('<input type="password" name="lock"> Password ');
+}
+echo('<input type="submit" value="Load Quiz">');
+echo("</form>\n");
+}
+?>
 <p>
-The assignment is configured by carefully editing the gift below without 
-introducing syntax errors.  Someday this will have a slick configuration 
-screen but for now we edit the gift.  I borrowed this user interface from the early
-days of Coursera configuration screens :).
-<p>
+The assignment is configured by carefully editing the gift below.
 The documentation for the GIFT format comes from 
 <a href="https://docs.moodle.org/29/en/GIFT_format" target="_blank">Moodle Documentation</a>.
 </p>
