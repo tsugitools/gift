@@ -85,7 +85,7 @@ if ( $files && isset($_POST['file']) ) {
         return;
     }
 
-    $_SESSION['success'] = 'Loaded quiz content from file.';
+    $_SESSION['success'] = 'Preloaded quiz content from file. Make sure to save the quiz below.';
     header( 'Location: '.addSession('configure.php') ) ;
     return;
 }
@@ -111,6 +111,7 @@ if ( $gift === false || strlen($gift) < 1 ) {
 // View
 $OUTPUT->header();
 $OUTPUT->bodyStart();
+$OUTPUT->topNav();
 $OUTPUT->flashMessages();
 ?>
 <p>Be careful in making any changes if this quiz has submissions.</p>
