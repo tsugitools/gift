@@ -29,7 +29,7 @@ function parse_gift($text, &$questions, &$errors) {
 
     $quesno = 0;
     foreach ( $raw_questions as $raw ) {
-        $pieces = explode('::', $raw);
+        $pieces = explode('::', $raw, 3);
         if ( count($pieces) != 3 ) {
             $errors[] = "Mal-formed question: ".$raw;
             continue;
