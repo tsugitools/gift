@@ -11,6 +11,27 @@ This tool currently contains two pieces of related functionality:
 
 These two pieces are related because they share a bunch of library code.
 
+Preloading Quizzes
+------------------
+
+You can have this quiz tool consulta folder to pre-load quizzes.  Use the following 
+configuration option in your `config.php`:
+
+    $CFG->giftquizzes = $CFG->dirroot.'/../php-solutions/quiz';
+
+It should be a folder with a serires of files that end in `*.txt` in the
+GIFT format.  You can store these files in a private GitHub repo.  You can 
+also add a password to all the files by creating the file `.lock` in the folder
+and put in a single line with the plaintext password to unlock the quzzes.
+
+You can request a default quiz from this folder using a GET parameter:
+
+    http://localhost:8888/wa4e/mod/gift/?quiz=00-CSS.txt
+
+The instructor still needs to go in and configure the quiz - but the right quiz 
+will be pre-populated in the configuration drop down and pre-loaded if there
+is no `.lock` file.
+
 Quiz format convertor from GIFT to QTI 1.2
 ==========================================
 
