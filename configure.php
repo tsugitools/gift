@@ -47,8 +47,8 @@ if ( isset ($CFG->giftquizzes) && is_dir($CFG->giftquizzes) ) {
         if ( strpos($file, '.') === 0 ) continue;
         $files[] = $file;
     }
+    sort($files);
 }
-sort($files);
 if ( count($files) < 1 ) {
     $_SESSION['error'] = "Found no files in ".$CFG->giftquizzes;
     header( 'Location: '.addSession('configure.php') ) ;
