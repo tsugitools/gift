@@ -17,8 +17,8 @@ and esaily edited by hand or even stored in a repository like github.",
         "internal"
     ),
     "source_url" => "https://github.com/tsugitools/gift",
+    // For now Tsugi tools delegate this to /lti/store
     "placements" => array(
-        "course_navigation", "homework_submission"
         /*
         "course_navigation", "homework_submission",
         "course_home_submission", "editor_button",
