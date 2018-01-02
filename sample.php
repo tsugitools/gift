@@ -4,7 +4,23 @@ function getSampleGIFT ()
 {
 return
 "// true/false
-::Q1 T/F:: 1+1=2 \\{yada\\} {T}
+::Q1 T/F:: 1+1=2 {T}
+
+// multiple choice 
+::Q2 MA:: One of these are righ and three are wrong 
+{
+=Right 
+~Wrong 
+~Incorrect 
+~Not right 
+}
+
+// multiple choice with multiple right and wrong
+::Q3 MA:: Two of these are right and two are wrong 
+{ =Right =Correct ~Wrong ~Incorrect }
+
+// fill-in-the-blank (only right answers)
+::Q4 Short Answer:: Two plus {=two =2} equals four.
 
 ";
 /*
