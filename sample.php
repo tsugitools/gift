@@ -7,7 +7,7 @@ return
 ::Q1 T/F:: 1+1=2 {T}
 
 // multiple choice 
-::Q2 MA:: One of these are righ and three are wrong 
+::Q2 MA:: One of these are right and three are wrong 
 {
 =Right 
 ~Wrong 
