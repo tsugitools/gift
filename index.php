@@ -227,4 +227,4 @@ $(document).ready(function(){
 </script>
 
 <?php
-$OUTPUT->footerStart();
+$OUTPUT->footerEnd();
