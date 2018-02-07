@@ -25,9 +25,13 @@ if ( isset($_GET['quiz']) && $USER->instructor ) {
 }
 
 // Get the settings
-$max_tries = Settings::linkGet('tries')+0;
+$max_str = Settings::linkGet('tries');
+$max_tries = 0;
+if ( is_numeric($max_str) ) $max_tries = $max_str+0;
 if ( $max_tries < 1 ) $max_tries = 1;
-$delay = Settings::linkGet('delay')+0;
+$delay_str = Settings::linkGet('delay');
+$delay = 0;
+if ( is_numeric($delay_str) ) $delay = $delay_str+0;
 
 // Get any due date information
 $dueDate = SettingsForm::getDueDate();
