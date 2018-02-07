@@ -368,8 +368,22 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                 $expected = $answer[0];  // An actual boolean
                 $oneanswer = $oneanswer || isset($submit[$a_code]);
                 $ans->checked = isset($submit[$a_code]);
-                $actual = isset($submit[$a_code]) ? ($submit[$a_code] == 'true') === $expected : false;
-                if ( $actual === $expected ) $got++;
+                // $actual = isset($submit[$a_code]) ? ($submit[$a_code] == 'true') === $expected : false;
+
+                $actual = false;
+                if (isset($submit[$a_code])) {
+                  if ($submit[$a_code] == 'true') {
+                    if ($expected){
+                      $actual = true;
+                    }
+                  }
+                } else {
+                  if (!$expected){
+                    $actual = true;
+                  }
+                }
+
+                if ( $actual ) $got++;
                 $need++;
                 $ans->code = $a_code;
                 if ( $doscore ) {
