@@ -1,0 +1,8 @@
+<phpunit>
+    <testsuites>
+        <testsuite name="Gift Test Suite">
+            <directory>tests/*</directory>
+            <!-- <exclude>mod/php-intro/lib</exclude> -->
+        </testsuite>
+    </testsuites>
+</phpunit>

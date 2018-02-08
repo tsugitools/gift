@@ -14,7 +14,7 @@ These two pieces are related because they share a bunch of library code.
 Preloading Quizzes
 ------------------
 
-You can have this quiz tool consulta folder to pre-load quizzes.  Use the following 
+You can have this quiz tool consult a folder to pre-load quizzes.  Use the following 
 configuration option in your `config.php`:
 
     $CFG->giftquizzes = $CFG->dirroot.'/../php-solutions/quiz';
@@ -56,5 +56,36 @@ You can play with my demo server at:
 
 
 Comments (and Pull requests) welcome.
+
+Unit Tests
+==========
+
+If you want to run and/or make Unit tests, first install composer from 
+
+https://getcomposer.org/doc/
+
+At some point you can run `composer` from the command line.   Then from 
+the gift folder do:
+
+    composer update
+
+This will install `phpunit` into a `vendor` folder - don't worry - this won't 
+go back into github - it is ignored.
+
+Then to run the unit tests do:
+
+    vendor/bin/phpunit
+
+It should look like this:
+
+    PHPUnit 5.7.27 by Sebastian Bergmann and contributors.
+    .  1 / 1 (100%)
+    Time: 21 ms, Memory: 4.00MB
+
+    OK (1 test, 4 assertions)
+
+The unit tests are in folders under the folder `tests` - just add a subfolder and your
+unit tests in php files.
+
 
 -- Chuck
