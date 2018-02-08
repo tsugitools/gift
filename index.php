@@ -14,7 +14,19 @@ function percent($x) {
 $LAUNCH = LTIX::requireData();
 $p = $CFG->dbprefix;
 
-if ( SettingsForm::handleSettingsPost() ) {
+if ( SettingsForm::isSettingsPost() ) {
+    // Validate settings...
+    if ( isset($_POST['tries']) && $_POST['tries'] != '' && ! is_numeric($_POST['tries']) ) {
+        $_SESSION['error'] = __('Tries must be numeric');
+        header( 'Location: '.addSession('index.php') ) ;
+        return;
+    }
+    if ( isset($_POST['delay']) && $_POST['delay'] != '' && ! is_numeric($_POST['delay']) ) {
+        $_SESSION['error'] = __('Delay must be numeric');
+        header( 'Location: '.addSession('index.php') ) ;
+        return;
+    }
+    SettingsForm::handleSettingsPost();
     header( 'Location: '.addSession('index.php') ) ;
     return;
 }
