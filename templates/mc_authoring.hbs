@@ -1,6 +1,6 @@
-<div id="q{{count}}_mc_possible_answer{{num}}">
-  <label for="q{{count}}_mc_answer{{num}}">{{__ 'Answer'}} {{num}}:</label>
-  <input type="text" name="q{{count}}_mc_answer{{num}}" id="q{{count}}_mc_answer{{num}}" value="{{value}}">
-  <label for="q{{count}}_mc_answer{{num}}_iscorrect">{{__ 'Correct'}}?</label>
-  <input type="checkbox" name="q{{count}}_mc_answer{{num}}_iscorrect" {{#if isCorrect}}checked{{/if}}>
+<div id="mc_possible_answer{{num}}_question{{count}}">
+  <label for="mc_answer{{num}}_question{{count}}">{{__ 'Answer'}} {{num}}:</label>
+  <input type="text" name="mc_answer{{num}}_question{{count}}" value="{{value}}">
+  <label for="mc_answer{{num}}_iscorrect_question{{count}}">{{__ 'Correct'}}?</label>
+  <input type="checkbox" name="mc_answer{{num}}_iscorrect_question{{count}}" {{#if isCorrect}}checked{{/if}}>
 </div>

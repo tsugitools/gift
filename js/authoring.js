@@ -16,7 +16,7 @@ function addTrueFalse(context) {
   } else if (context.answer == "F") {
     context.answer_false = true;
   }
-  tsugiHandlebarsToDiv_noEmpty("q"+context.count+"_content", 'tf_authoring', context);
+  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'tf_authoring', context);
 }
 
 function addMultipleChoice(context) {
@@ -27,9 +27,11 @@ function addMultipleChoice(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      tsugiHandlebarsToDiv_noEmpty("q"+context.count+"_content", 'mc_authoring', answer_context);
+      tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', answer_context);
     }
   }
+  // Always add one empty answer field
+  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', null);
 }
 
 function addShortAnswer(context) {
@@ -39,9 +41,11 @@ function addShortAnswer(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      tsugiHandlebarsToDiv_noEmpty("q"+context.count+"_content", 'sa_authoring', answer_context);
+      tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', answer_context);
     }
   }
+  // Always add one empty answer field
+  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', null);
 }
 
 $("#question_type_select").change(function() {
