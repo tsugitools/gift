@@ -29,9 +29,13 @@ function addMultipleChoice(context) {
       answer_context.num = a + 1;
       tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', answer_context);
     }
+    var answer_number = context.parsed_answer.length
+  } else {
+    var answer_number = 1;
   }
   // Always add one empty answer field
-  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', null);
+  context.num = answer_number;
+  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', context);
 }
 
 function addShortAnswer(context) {
@@ -43,9 +47,13 @@ function addShortAnswer(context) {
       answer_context.num = a + 1;
       tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', answer_context);
     }
+    var answer_number = context.parsed_answer.length
+  } else {
+    var answer_number = 1;
   }
   // Always add one empty answer field
-  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', null);
+  context.num = answer_number;
+  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', context);
 }
 
 $("#question_type_select").change(function() {
