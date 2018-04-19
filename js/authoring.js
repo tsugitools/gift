@@ -77,6 +77,19 @@ function addAnswer(div, template_name, answer_context) {
   $(div).append(tsugiHandlebarsRender(template_name, answer_context))
 }
 
+function repurposeButton(btn_id) {
+  // TODO: This feels really gross and messy - look at it again later
+  // get the numbers for the answer and question by parsing the button id
+  var answer_num = btn_id.split('_')[2];
+  answer_num = answer_num.charAt(answer_num.length-1);
+  var question_num = btn_id.split('_')[3];
+  question_num = question_num.charAt(question_num.length-1);
+
+  // re-assign the on-click value of the button and change the value it displays
+  $("#"+btn_id).attr("onclick","$('#mc_possible_answer"+answer_num+"_question"+question_num+"').remove();");
+  $("#"+btn_id).val("-");
+}
+
 // In the event a question is deleted, run through the form and re-number all of the items
 function renumber_questions() {
   var question_headers = $("h1");

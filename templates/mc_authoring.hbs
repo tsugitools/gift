@@ -4,14 +4,15 @@
   <label for="mc_answer{{num}}_iscorrect_question{{count}}">{{__ 'Correct'}}?</label>
   <input type="checkbox" name="mc_answer{{num}}_iscorrect_question{{count}}" {{#if isCorrect}}checked{{/if}}>
   {{#if value}}
-  <input type="button" name="btn_remove_answer{{num}}_question{{count}}" value="-" onclick="$('#mc_possible_answer{{num}}_question{{count}}').remove();">
+  <input type="button" name="btn_answer{{num}}_question{{count}}" value="-" onclick="$('#mc_possible_answer{{num}}_question{{count}}').remove();">
   {{else}}
-  <input type="button" name="btn_add_answer{{num}}_question{{count}}" value="+"
+  <input type="button" name="btn_answer{{num}}_question{{count}}" id="btn_add_answer{{num}}_question{{count}}" value="+"
   onclick="
     var context = {}
     context.count={{count}};
     context.num={{num}}+1;
     addAnswer('#content_question'+context.count, 'mc_authoring', context);
+    repurposeButton(this.id);
   "
   >
   {{/if}}
