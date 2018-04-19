@@ -1,3 +1,17 @@
+// Add a new question when the dropdown is changed
+$("#question_type_select").change(function() {
+  var selected_value = $("#question_type_select").val();
+  if (selected_value != "") { // As long as the selected value isn't the placeholder
+    // Create a new context for the templates
+    var context = {};
+    context.count = ++question_number;
+    context.type = selected_value;
+    addQuestion(context);
+    $("#question_type_select").val(""); // reset the dropdown
+  }
+});
+
+// Add a question to the form with the given context
 function addQuestion(context) {
   tsugiHandlebarsToDiv_noEmpty('quiz_content', 'common', context);
   switch (context.type) {
@@ -10,6 +24,7 @@ function addQuestion(context) {
   lti_frameResize();
 }
 
+// Add a True/False question to the form. If the context has an answer, fill it out
 function addTrueFalse(context) {
   if (context.answer == "T") {
     context.answer_true = true;
@@ -19,6 +34,7 @@ function addTrueFalse(context) {
   tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'tf_authoring', context);
 }
 
+// Add a Multiple Choice/Multiple Answer Question to the form. If there are answers in the context, add them
 function addMultipleChoice(context) {
   if ("parsed_answer" in context) {
     for (var a=0; a<context.parsed_answer.length; a++) {
@@ -38,6 +54,7 @@ function addMultipleChoice(context) {
   tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', context);
 }
 
+// Add a Short Answer Question to the form. If there are answers in the context, add them
 function addShortAnswer(context) {
   if ("parsed_answer" in context) {
     for (var a=0; a<context.parsed_answer.length; a++) {
@@ -56,21 +73,13 @@ function addShortAnswer(context) {
   tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', context);
 }
 
-$("#question_type_select").change(function() {
-  var selected_value = $("#question_type_select").val();
-  if (selected_value != "") {
-    var context = {};
-    context.count = ++question_number;
-    context.type = selected_value;
-    addQuestion(context);
-    $("#question_type_select").val("");
-  }
-});
-
+// The provided "tsugiHandlebarsToDiv" destroys all content in the div.
+// I'm using the tsugiHandlebarsRender instead
 function tsugiHandlebarsToDiv_noEmpty(div, name, context) {
   $('#'+div).append(tsugiHandlebarsRender(name, context));
 }
 
+// In the event a question is deleted, run through the form and re-number all of the items
 function renumber_questions() {
   var question_headers = $("h1");
   for (var i=0;i<question_headers.length;i++) {
