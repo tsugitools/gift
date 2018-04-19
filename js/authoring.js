@@ -43,14 +43,15 @@ function addMultipleChoice(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', context))
+      console.log(answer_context);
+      $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', answer_context))
     }
     var answer_number = context.parsed_answer.length
   } else {
     var answer_number = 1;
   }
   // Always add one empty answer field
-  context.num = answer_number;
+  context.num = ++answer_number;
   $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', context))
 }
 
@@ -62,14 +63,14 @@ function addShortAnswer(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', context))
+      $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', answer_context))
     }
     var answer_number = context.parsed_answer.length
   } else {
     var answer_number = 1;
   }
   // Always add one empty answer field
-  context.num = answer_number;
+  context.num = ++answer_number;
   $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', context))
 }
 
