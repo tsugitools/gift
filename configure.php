@@ -43,8 +43,6 @@ $OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_aut
 <script type="text/javascript" src="js/authoring.js"></script>
 <script>
 
-question_number = 0;
-
 $(document).ready(()=> {
   // see if there's already a quiz saved in the JSON
   $.getJSON("<?= addSession('quiz_data.php') ?>", function(quizData) {
@@ -53,10 +51,9 @@ $(document).ready(()=> {
     } else {
       for (var q=0; q<quizData.length;q++) {
         var context = quizData[q];
-        context.count = q + 1;
+        context.count = $("#quiz_content").children().length+1;
         addQuestion(context);
       }
-      question_number = quizData.length;
     }
   });
 })

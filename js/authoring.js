@@ -4,7 +4,7 @@ $("#question_type_select").change(function() {
   if (selected_value != "") { // As long as the selected value isn't the placeholder
     // Create a new context for the templates
     var context = {};
-    context.count = ++question_number;
+    context.count = $("#quiz_content").children().length+1;
     context.type = selected_value;
     addQuestion(context);
     $("#question_type_select").val(""); // reset the dropdown
@@ -13,6 +13,7 @@ $("#question_type_select").change(function() {
 
 // Add a question to the form with the given context
 function addQuestion(context) {
+  console.log(context);
   $('#quiz_content').append(tsugiHandlebarsRender('common', context))
   switch (context.type) {
     case "true_false_question": addTrueFalse(context); break;
