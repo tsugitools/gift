@@ -69,7 +69,10 @@ function addShortAnswer(context) {
   addAnswer('#content_question'+context.count, 'sa_authoring', context)
 }
 
-function addAnswer(div, template_name, answer_context) {
+// Adds an answer option to a given div
+// requires a div ID, a template
+// optional object answer_context (only for loading quizes)
+function addAnswer(div, template_name, answer_context={}) {
   answer_context.num = $(div).children().length + 1;
   answer_context.count = div.split("question")[1];
   $(div).append(tsugiHandlebarsRender(template_name, answer_context))

@@ -6,7 +6,7 @@
   {{else}}
   <input type="button" name="btn_answer{{num}}_question{{count}}" id="btn_add_answer{{num}}_question{{count}}" value="+"
   onclick="
-    addAnswer('#content_question{{count}}', 'sa_authoring', {});
+    addAnswer('#content_question{{count}}', 'sa_authoring');
     repurposeButton(this.id);
   ">
   {{/if}}
