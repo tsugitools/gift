@@ -41,8 +41,6 @@ function addMultipleChoice(context) {
       var answer_context = {};
       answer_context.isCorrect = context.parsed_answer[a][0];
       answer_context.value = context.parsed_answer[a][1];
-      answer_context.count = context.count;
-      answer_context.num = a + 1;
       addAnswer('#content_question'+context.count, 'mc_authoring', answer_context)
     }
     var answer_number = context.parsed_answer.length
@@ -60,8 +58,6 @@ function addShortAnswer(context) {
     for (var a=0; a<context.parsed_answer.length; a++) {
       var answer_context = {};
       answer_context.value = context.parsed_answer[a][1];
-      answer_context.count = context.count;
-      answer_context.num = a + 1;
       addAnswer('#content_question'+context.count, 'sa_authoring', answer_context)
     }
     var answer_number = context.parsed_answer.length
@@ -74,6 +70,8 @@ function addShortAnswer(context) {
 }
 
 function addAnswer(div, template_name, answer_context) {
+  answer_context.num = $(div).children().length + 1;
+  answer_context.count = div.split("question")[1];
   $(div).append(tsugiHandlebarsRender(template_name, answer_context))
 }
 
@@ -86,8 +84,25 @@ function repurposeButton(btn_id) {
   question_num = question_num.charAt(question_num.length-1);
 
   // re-assign the on-click value of the button and change the value it displays
-  $("#"+btn_id).attr("onclick","$('#mc_possible_answer"+answer_num+"_question"+question_num+"').remove();");
+  $("#"+btn_id).attr("onclick",
+    "$('#mc_possible_answer"+answer_num+"_question"+question_num+"').remove(); renumber_answers("+question_num+");"
+  );
   $("#"+btn_id).val("-");
+}
+
+function renumber_answers(question_number) {
+  var answers = $("#content_question"+question_number).children();
+  for (var i = 0; i < answers.length; i++) {
+    // get the number that this answer currently has
+    var to_replace = answers[i].id.split('_')[2];
+    // var to_replace = getAnswerNumberFromString(answers[i].id);
+    // update the id of the div for this with the new answer
+    answers[i].id = answers[i].id.replace(to_replace, "answer" + (i+1));
+    // update the entirety of the html for this div with the new answer
+    var html = $(answers[i]).html();
+    var new_html = html.replace(new RegExp(to_replace, 'g'), "answer" + (i+1));
+    $(answers[i]).html(new_html);
+  }
 }
 
 // In the event a question is deleted, run through the form and re-number all of the items
