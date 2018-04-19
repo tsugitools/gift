@@ -1,6 +1,5 @@
 <?php
 require_once "../config.php";
-require_once "templates/authoring.php";
 
 use \Tsugi\Core\Cache;
 use \Tsugi\Core\LTIX;
@@ -37,7 +36,7 @@ $OUTPUT->flashMessages();
 $OUTPUT->footer();
 $OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_authoring'));
 ?>
-<script type="text/javascript" src="js/author.js"></script>
+<script type="text/javascript" src="js/authoring.js"></script>
 <script>
 
 question_number = 0;
