@@ -1,0 +1,6 @@
+<div id="q{{count}}_mc_possible_answer{{num}}">
+  <label for="q{{count}}_mc_answer{{num}}">{{__ 'Answer'}} {{num}}:</label>
+  <input type="text" name="q{{count}}_mc_answer{{num}}" id="q{{count}}_mc_answer{{num}}" value="{{value}}">
+  <label for="q{{count}}_mc_answer{{num}}_iscorrect">{{__ 'Correct'}}?</label>
+  <input type="checkbox" name="q{{count}}_mc_answer{{num}}_iscorrect" {{#if isCorrect}}checked{{/if}}>
+</div>

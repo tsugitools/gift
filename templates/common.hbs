@@ -1,0 +1,11 @@
+<div id="question{{count}}">
+  <h1>{{__ 'Question'}} {{count}}</h1>
+  <input type="button" value="X" name="btn_remove_question{{count}}"
+    onclick='$("#question{{count}}").remove(); renumber_questions();'>
+  <label for="q{{count}}_title">{{__ 'Question Title:'}}</label>
+  <input type="text" name="title" id="q{{count}}_title" value="{{name}}">
+  <br>
+  <label for="q{{count}}_text">{{__ 'Question Text:'}}</label>
+  <input type="text" name="questionText" id="q{{count}}_text" value="{{question}}">
+  <div id="q{{count}}_content"></div>
+</div>
