@@ -13,7 +13,7 @@ $("#question_type_select").change(function() {
 
 // Add a question to the form with the given context
 function addQuestion(context) {
-  tsugiHandlebarsToDiv_noEmpty('quiz_content', 'common', context);
+  $('#quiz_content').append(tsugiHandlebarsRender('common', context))
   switch (context.type) {
     case "true_false_question": addTrueFalse(context); break;
     case "multiple_choice_question": addMultipleChoice(context); break;
@@ -31,7 +31,7 @@ function addTrueFalse(context) {
   } else if (context.answer == "F") {
     context.answer_false = true;
   }
-  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'tf_authoring', context);
+  $('#content_question'+context.count).append(tsugiHandlebarsRender('tf_authoring', context))
 }
 
 // Add a Multiple Choice/Multiple Answer Question to the form. If there are answers in the context, add them
@@ -43,7 +43,7 @@ function addMultipleChoice(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', answer_context);
+      $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', context))
     }
     var answer_number = context.parsed_answer.length
   } else {
@@ -51,7 +51,7 @@ function addMultipleChoice(context) {
   }
   // Always add one empty answer field
   context.num = answer_number;
-  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'mc_authoring', context);
+  $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', context))
 }
 
 // Add a Short Answer Question to the form. If there are answers in the context, add them
@@ -62,7 +62,7 @@ function addShortAnswer(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', answer_context);
+      $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', context))
     }
     var answer_number = context.parsed_answer.length
   } else {
@@ -70,13 +70,7 @@ function addShortAnswer(context) {
   }
   // Always add one empty answer field
   context.num = answer_number;
-  tsugiHandlebarsToDiv_noEmpty("content_question"+context.count, 'sa_authoring', context);
-}
-
-// The provided "tsugiHandlebarsToDiv" destroys all content in the div.
-// I'm using the tsugiHandlebarsRender instead
-function tsugiHandlebarsToDiv_noEmpty(div, name, context) {
-  $('#'+div).append(tsugiHandlebarsRender(name, context));
+  $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', context))
 }
 
 // In the event a question is deleted, run through the form and re-number all of the items
