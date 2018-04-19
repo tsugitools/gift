@@ -6,5 +6,13 @@
   {{#if value}}
   <input type="button" name="btn_remove_answer{{num}}_question{{count}}" value="-" onclick="$('#mc_possible_answer{{num}}_question{{count}}').remove();">
   {{else}}
+  <input type="button" name="btn_add_answer{{num}}_question{{count}}" value="+"
+  onclick="
+    var context = {}
+    context.count={{count}};
+    context.num={{num}}+1;
+    addAnswer('#content_question'+context.count, 'mc_authoring', context);
+  "
+  >
   {{/if}}
 </div>
