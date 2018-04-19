@@ -31,7 +31,7 @@ function addTrueFalse(context) {
   } else if (context.answer == "F") {
     context.answer_false = true;
   }
-  $('#content_question'+context.count).append(tsugiHandlebarsRender('tf_authoring', context))
+  addAnswer('#content_question'+context.count, 'tf_authoring', context)
 }
 
 // Add a Multiple Choice/Multiple Answer Question to the form. If there are answers in the context, add them
@@ -43,8 +43,7 @@ function addMultipleChoice(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      console.log(answer_context);
-      $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', answer_context))
+      addAnswer('#content_question'+context.count, 'mc_authoring', answer_context)
     }
     var answer_number = context.parsed_answer.length
   } else {
@@ -52,7 +51,7 @@ function addMultipleChoice(context) {
   }
   // Always add one empty answer field
   context.num = ++answer_number;
-  $('#content_question'+context.count).append(tsugiHandlebarsRender('mc_authoring', context))
+  addAnswer('#content_question'+context.count, 'mc_authoring', context)
 }
 
 // Add a Short Answer Question to the form. If there are answers in the context, add them
@@ -63,7 +62,7 @@ function addShortAnswer(context) {
       answer_context.value = context.parsed_answer[a][1];
       answer_context.count = context.count;
       answer_context.num = a + 1;
-      $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', answer_context))
+      addAnswer('#content_question'+context.count, 'sa_authoring', answer_context)
     }
     var answer_number = context.parsed_answer.length
   } else {
@@ -71,7 +70,11 @@ function addShortAnswer(context) {
   }
   // Always add one empty answer field
   context.num = ++answer_number;
-  $('#content_question'+context.count).append(tsugiHandlebarsRender('sa_authoring', context))
+  addAnswer('#content_question'+context.count, 'sa_authoring', context)
+}
+
+function addAnswer(div, template_name, answer_context) {
+  $(div).append(tsugiHandlebarsRender(template_name, answer_context))
 }
 
 // In the event a question is deleted, run through the form and re-number all of the items
