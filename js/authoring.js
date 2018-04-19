@@ -98,7 +98,6 @@ function renumber_answers(question_number) {
   for (var i = 0; i < answers.length; i++) {
     // get the number that this answer currently has
     var to_replace = answers[i].id.split('_')[2];
-    // var to_replace = getAnswerNumberFromString(answers[i].id);
     // update the id of the div for this with the new answer
     answers[i].id = answers[i].id.replace(to_replace, "answer" + (i+1));
     // update the entirety of the html for this div with the new answer
@@ -110,8 +109,17 @@ function renumber_answers(question_number) {
 
 // In the event a question is deleted, run through the form and re-number all of the items
 function renumber_questions() {
-  var question_headers = $("h1");
-  for (var i=0;i<question_headers.length;i++) {
-    $(question_headers[i]).html("Question " + (i+1));
+  console.log("renumber questions....");
+  var questions = $("#quiz_content").children();
+  for (var i = 0; i < questions.length; i++) {
+    // get the string we need to replace later (question_)
+    var to_replace = questions[i].id;
+    // change the H1 for the question
+    $(questions[i]).find("h1").text("Question " + (i+1));
+    // change the id for the div
+    questions[i].id = "question"+(i+1);
+    var html = $(questions[i]).html();
+    var new_html = html.replace(new RegExp(to_replace, 'g'), "question"+(i+1));
+    $(questions[i]).html(new_html);
   }
 }
