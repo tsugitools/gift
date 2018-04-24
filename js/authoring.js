@@ -13,7 +13,6 @@ $("#question_type_select").change(function() {
 
 // Add a question to the form with the given context
 function addQuestion(context) {
-  console.log(context);
   $('#quiz_content').append(tsugiHandlebarsRender('common', context))
   switch (context.type) {
     case "true_false_question": addTrueFalse(context); break;
