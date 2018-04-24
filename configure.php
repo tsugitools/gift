@@ -26,7 +26,6 @@ $OUTPUT->flashMessages();
 ?>
 <form method="post">
 <div id="quiz_content"></div>
-</form>
 <select id="question_type_select">
   <option value=""> -- Add a New Question -- </option>
   <option value="true_false_question">True/False Question</option>
@@ -36,6 +35,7 @@ $OUTPUT->flashMessages();
 <input type="submit" value="Save">
 <input type=submit name=doCancel onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
 <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p>
+</form>
 <?php
 $OUTPUT->footer();
 $OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_authoring'));
