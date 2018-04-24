@@ -1,12 +1,12 @@
-<div id="sa_possible_answer{{num}}_question{{count}}">
-  <label for="sa_answer{{num}}_question{{count}}">{{__ 'Accepted Answer:'}}</label>
-  <input type="text" name="sa_answer{{num}}_question{{count}}" value="{{value}}">
+<div id="possible_answer{{num}}_question{{count}}">
+  <label for="answer{{num}}_question{{count}}">{{__ 'Accepted Answer:'}}</label>
+  <input type="text" name="answer{{num}}_question{{count}}" value="{{value}}">
   {{#if value}}
-  <input type="button" name="btn_answer{{num}}_question{{count}}" value="-" onclick="$('#sa_possible_answer{{num}}_question{{count}}').remove();">
+  <input type="button" name="btn_answer{{num}}_question{{count}}" value="-" onclick="$('#possible_answer{{num}}_question{{count}}').remove();">
   {{else}}
   <input type="button" name="btn_answer{{num}}_question{{count}}" id="btn_add_answer{{num}}_question{{count}}" value="+"
   onclick="
-    addAnswer('#content_question{{count}}', 'sa_authoring');
+    addAnswer('#content_question{{count}}', 'authoring');
     repurposeButton(this.id);
   ">
   {{/if}}
