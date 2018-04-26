@@ -11,13 +11,19 @@ $("#question_type_select").change(function() {
   }
 });
 
-// Add a question to the form with the given context
+/* Add a question to the form with the given context
+   context should have, at minimum, "count" and "type"
+   if more is included in the context (i.e. we are loading a quiz from a saved gift),
+   what is required changes based on the type of question (provided by parse_gift(), but for reference):
+      T/F: "answer" (either "T" or "F")
+      MC/MA/SA: "parsed_answer" (array of arrays, each in the form [bool, 'answer_text', '', 'question_id'])
+*/
 function addQuestion(context) {
   $('#quiz_content').append(tsugiHandlebarsRender('common', context))
   switch (context.type) {
     case "true_false_question": addTrueFalse(context); break;
-    case "multiple_choice_question": addMultipleChoice(context); break;
-    case "multiple_answers_question": addMultipleChoice(context); break;
+    case "multiple_choice_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
+    case "multiple_answers_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
     case "short_answer_question": addShortAnswer(context); break;
     default: console.log("unrecognized question type: " + context.type);
   }
@@ -79,6 +85,8 @@ function addAnswer(div, template_name, answer_context={}) {
   lti_frameResize();
 }
 
+// Change the function of an answer button from "+" (add) to "-" (remove this option)
+// requires the id of the button to affect
 function repurposeButton(btn_id) {
   // TODO: This feels really gross and messy - look at it again later
   // get the numbers for the answer and question by parsing the button id
@@ -94,6 +102,8 @@ function repurposeButton(btn_id) {
   $("#"+btn_id).val("-");
 }
 
+// runs through all the provided answers for the given question number and modifies the
+// html so the answers are always numbered sequentially from 1 to X
 function renumber_answers(question_number) {
   var answers = $("#content_question"+question_number).children();
   for (var i = 0; i < answers.length; i++) {
@@ -109,6 +119,7 @@ function renumber_answers(question_number) {
 }
 
 // In the event a question is deleted, run through the form and re-number all of the items
+// very similar to renumber_answers()
 function renumber_questions() {
   console.log("renumber questions....");
   var questions = $("#quiz_content").children();
