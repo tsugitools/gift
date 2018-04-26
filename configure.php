@@ -47,23 +47,24 @@ $OUTPUT->flashMessages();
 ?>
 <form method="post">
 <div id="quiz_content"></div>
-<select id="question_type_select">
-  <option value=""> -- Add a New Question -- </option>
-  <option value="true_false_question">True/False Question</option>
-  <option value="multiple_choice_question">Multiple Choice/Multiple Answer Question</option>
-  <option value="short_answer_question">Short Answer Question</option>
-</select><br>
-<input type="submit" value="Save">
-<input type=submit name=doCancel onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
-<input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p>
+<div class="quiz-controls">
+  <select class="form-control question-type-select" id="question_type_select">
+    <option value=""> -- Add a New Question -- </option>
+    <option value="true_false_question">True/False Question</option>
+    <option value="multiple_choice_question">Multiple Choice/Multiple Answer Question</option>
+    <option value="short_answer_question">Short Answer Question</option>
+  </select>
+  <input type="submit" class="btn btn-default" value="Save">
+  <input type=submit name=doCancel class="btn btn-default" onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
+  <!-- <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p> -->
+</div>
 </form>
 <?php
-$OUTPUT->footer();
+$OUTPUT->footerStart();
 $OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_authoring'));
 ?>
 <script type="text/javascript" src="js/authoring.js"></script>
 <script>
-
 $(document).ready(()=> {
   // see if there's already a quiz saved in the JSON
   $.getJSON("<?= addSession('quiz_data.php') ?>", function(quizData) {
@@ -79,3 +80,5 @@ $(document).ready(()=> {
   });
 })
 </script>
+<?php
+$OUTPUT->footerEnd();
