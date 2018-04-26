@@ -1,8 +1,25 @@
 <div class="question-container" id="question{{count}}">
   <div>
     <h1 class="question-title">{{__ 'Question'}} {{count}}</h1>
-    <input type="button" class="btn btn-default" value="X" name="btn_remove_question{{count}}"
-      onclick='$("#question{{count}}").remove(); renumber_questions();'>
+    <div>
+    <input type="button" class="btn btn-default" value="X" id="delete_question{{count}}" name="btn_remove_question{{count}}"
+      onclick='
+        $("#delete_question{{count}}").hide();
+        $("#confirm_delete_question{{count}}").show("fade");
+        $("#cancel_delete_question{{count}}").show("fade");
+      '>
+      <input type="button" class="btn btn-warning" value="Yes, Delete" id="confirm_delete_question{{count}}" style="display:none"
+      onclick='
+        $("#question{{count}}").remove();
+        renumber_questions();
+        '>
+      <input type="button" class="btn btn-info" value="Cancel" id="cancel_delete_question{{count}}" style="display:none"
+      onclick='
+      $("#confirm_delete_question{{count}}").hide();
+      $("#cancel_delete_question{{count}}").hide();
+      $("#delete_question{{count}}").show("fade");
+      '>
+    </div>
   </div>
   <label for="title_question{{count}}">{{__ 'Question Title:'}} (NOT IMPLEMENTED YET)</label>
   <input type="text" class="form-control" name="title_question{{count}}" value="{{name}}">
