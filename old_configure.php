@@ -147,7 +147,7 @@ The documentation for the GIFT format comes from
 </textarea>
 <p>
 <input type="submit" value="Save">
-<input type=submit name=doCancel onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
+<input type=submit name=doCancel onclick="location='<?php echo(addSession('configure.php'));?>'; return false;" value="Cancel"></p>
 </form>
 <?php
 
