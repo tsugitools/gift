@@ -1,5 +1,7 @@
 <?php
 require_once "../config.php";
+require_once "parse.php";
+require_once "configure_parse.php";
 
 use \Tsugi\Core\Cache;
 use \Tsugi\Core\LTIX;
@@ -10,6 +12,25 @@ if ( ! $USER->instructor ) die("Requires instructor role");
 
 // Model
 $p = $CFG->dbprefix;
+
+
+
+if (!empty($_POST)) {
+
+  $gift = parse_configure_post();
+
+  // Sanity check
+  $retval = check_gift($gift);
+  if ( ! $retval ) {
+      header( 'Location: '.addSession('configure.php') ) ;
+      return;
+  }
+
+  $LINK->setJson($gift);
+  $_SESSION['success'] = 'Quiz updated';
+  header( 'Location: '.addSession('index.php') ) ;
+  return;
+}
 
 // View
 $OUTPUT->header();
