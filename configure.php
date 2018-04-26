@@ -28,7 +28,11 @@ if (!empty($_POST)) {
 
   $LINK->setJson($gift);
   $_SESSION['success'] = 'Quiz updated';
-  header( 'Location: '.addSession('index.php') ) ;
+  if ($_POST['save_quiz'] == "Save and Return") {
+    header( 'Location: '.addSession('index.php') ) ;
+  } else {
+    header( 'Location: '.addSession('configure.php') ) ;
+  }
   return;
 }
 
@@ -54,7 +58,8 @@ $OUTPUT->flashMessages();
     <option value="multiple_choice_question">Multiple Choice/Multiple Answer Question</option>
     <option value="short_answer_question">Short Answer Question</option>
   </select>
-  <input type="submit" class="btn btn-default" value="Save">
+  <input type="submit" class="btn btn-default" name="save_quiz" value="Save">
+  <input type="submit" class="btn btn-default" name="save_quiz" value="Save and Return">
   <input type=submit name=doCancel class="btn btn-default" onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
   <!-- <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p> -->
 </div>
