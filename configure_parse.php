@@ -39,7 +39,7 @@ function get_question($num) {
       if (strpos($key_name, "answer") !== false) {
         // Get the number for this answer from the key name (format "answerX" or "answerX_iscorrect")
         $key_parts = explode("_", $key_name); // make an array from the key name (['answerX', 'questionX'])
-        $answer_index = substr($key_parts[0], -1); // TODO: this will break on more than 9 questions
+        $answer_index = explode("answer", $key_parts[0])[1];
         // is this the text of the answer or an indicator that this is the correct answer?
         if (sizeof($key_parts) > 1 && $key_parts[1] == 'iscorrect') {
           // T/F questions are a little different. We can identify them because they have an 'iscorrect' key
