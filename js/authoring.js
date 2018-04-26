@@ -89,7 +89,7 @@ function repurposeButton(btn_id) {
 
   // re-assign the on-click value of the button and change the value it displays
   $("#"+btn_id).attr("onclick",
-    "$('#mc_possible_answer"+answer_num+"_question"+question_num+"').remove(); renumber_answers("+question_num+");"
+    "$('#possible_answer"+answer_num+"_question"+question_num+"').remove(); renumber_answers("+question_num+");"
   );
   $("#"+btn_id).val("-");
 }
@@ -98,7 +98,7 @@ function renumber_answers(question_number) {
   var answers = $("#content_question"+question_number).children();
   for (var i = 0; i < answers.length; i++) {
     // get the number that this answer currently has
-    var to_replace = answers[i].id.split('_')[2];
+    var to_replace = answers[i].id.split('_')[1];
     // update the id of the div for this with the new answer
     answers[i].id = answers[i].id.replace(to_replace, "answer" + (i+1));
     // update the entirety of the html for this div with the new answer
