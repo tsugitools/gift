@@ -2,12 +2,17 @@
   <label for="answer{{num}}_question{{count}}">{{__ 'Accepted Answer:'}}</label>
   <input type="text" class="form-control answer-option"name="answer{{num}}_question{{count}}" value="{{value}}">
   {{#if value}}
-  <input type="button" class="btn btn-default" name="btn_answer{{num}}_question{{count}}" value="-" onclick="$('#possible_answer{{num}}_question{{count}}').remove();">
+  <input type="button" class="btn btn-default" name="btn_answer{{num}}_question{{count}}" value="-"
+  onclick="
+    $('#possible_answer{{num}}_question{{count}}').remove();
+    set_focus_on_lastinput('#content_question{{count}}');
+    ">
   {{else}}
   <input type="button" class="btn btn-default" name="btn_answer{{num}}_question{{count}}" id="btn_add_answer{{num}}_question{{count}}" value="+"
   onclick="
     addAnswer('#content_question{{count}}', 'sa_authoring');
     repurposeButton(this.id);
+    set_focus_on_lastinput('#content_question{{count}}');
   ">
   {{/if}}
 </div>

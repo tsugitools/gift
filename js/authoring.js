@@ -89,7 +89,7 @@ function repurposeButton(btn_id) {
 
   // re-assign the on-click value of the button and change the value it displays
   $("#"+btn_id).attr("onclick",
-    "$('#possible_answer"+answer_num+"_question"+question_num+"').remove(); renumber_answers("+question_num+");"
+    "$('#possible_answer"+answer_num+"_question"+question_num+"').remove(); renumber_answers("+question_num+"); set_focus_on_lastinput('#content_question"+question_num+"');"
   );
   $("#"+btn_id).val("-");
 }

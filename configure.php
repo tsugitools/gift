@@ -64,6 +64,7 @@ $OUTPUT->footerStart();
 $OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_authoring'));
 ?>
 <script type="text/javascript" src="js/authoring.js"></script>
+<script type="text/javascript" src="js/authoring_keyboard_nav.js"></script>
 <script>
 $(document).ready(()=> {
   // see if there's already a quiz saved in the JSON
