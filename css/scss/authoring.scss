@@ -1,8 +1,18 @@
 $grey: #808080;
 $light-grey: #e7e7e7;
 
+$light-pink: #f8d7da;
+$dark-pink: #f5c6cb;
+$maroon: #721c24;
+
 h1 {
   font-size: 18px;
+}
+
+.warning {
+  background-color: $light-pink;
+  border: 1px solid $dark-pink;
+  border-radius: 5px;
 }
 
 .question-container {
@@ -43,7 +53,10 @@ h1 {
 
 .truefalse-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: 0;
+  width: 25%;
 
   > * {
     margin: 0 .5em;
