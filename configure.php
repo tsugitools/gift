@@ -93,6 +93,11 @@ $(document).ready(()=> {
   $(".save-buttons").mouseenter(function() {
     validate_quiz();
   })
+
+  $("#quiz_content").change(function() {
+    validate_quiz();
+  });
+
 })
 </script>
 <?php
