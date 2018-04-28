@@ -89,6 +89,10 @@ function create_gift_format($question) {
     }
     $answers= implode(" ", $answers);
   }
+  // was the html box checked? if so, prepend the text with [html] for the parser
+  if (isset($question['html'])) {
+    $question['text'] = '[html]'.$question['text'];
+  }
   // create the formatted string and return it
   return "::{$question['title']}:: {$question['text']} {{$answers}}";
 }

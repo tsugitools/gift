@@ -224,6 +224,7 @@ function parse_gift($text, &$questions, &$errors) {
         $qobj->name = $name;
         if ( strpos($question,'[html]') === 0 ) {
             $question = ltrim(substr($question,6));
+            $qobj->html = true;
         } else {
             $question = htmlentities($question);
         }

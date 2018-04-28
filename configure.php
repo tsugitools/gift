@@ -62,7 +62,7 @@ $OUTPUT->flashMessages();
   <input type="submit" class="btn btn-default" name="save_quiz" value="Save">
   <input type="submit" class="btn btn-default" name="save_quiz" value="Save and Return">
   <input type=submit name=doCancel class="btn btn-default" onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
-  <!-- <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p> -->
+  <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p>
 </div>
 </form>
 <?php
@@ -80,6 +80,8 @@ $(document).ready(()=> {
     } else {
       for (var q=0; q<quizData.length;q++) {
         var context = quizData[q];
+        // decode htmlentities - from https://stackoverflow.com/a/10715834
+        context.question = $('<textarea/>').html(context.question).text();
         context.count = $("#quiz_content").children().length+1;
         addQuestion(context);
       }

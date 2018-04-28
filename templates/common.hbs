@@ -26,5 +26,9 @@
   <label for="text_question{{count}}">{{__ 'Question Text:'}}</label>
   <input type="text" class="form-control" name="text_question{{count}}" value="{{question}}">
   <input type="hidden" name="type_question{{count}}" value="{{type}}">
+  <label for="html_question{{count}}" class="right">
+    <input type="checkbox" name="html_question{{count}}" {{#if html}}checked{{/if}}>
+    Use HTML in question text
+  </label>
   <div class="question-content-container" id="content_question{{count}}"></div>
 </div>
