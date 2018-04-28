@@ -59,8 +59,10 @@ $OUTPUT->flashMessages();
     <option value="multiple_choice_question">Multiple Choice/Multiple Answer Question</option>
     <option value="short_answer_question">Short Answer Question</option>
   </select>
-  <input type="submit" class="btn btn-default" name="save_quiz" value="Save">
-  <input type="submit" class="btn btn-default" name="save_quiz" value="Save and Return">
+  <div class="save-buttons">
+    <input type="submit" class="btn btn-default" name="save_quiz" value="Save">
+    <input type="submit" class="btn btn-default" name="save_quiz" value="Save and Return">
+  </div>
   <input type=submit name=doCancel class="btn btn-default" onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
   <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p>
 </div>
@@ -88,7 +90,7 @@ $(document).ready(()=> {
     }
   });
 
-  $(".quiz-controls").mouseenter(function() {
+  $(".save-buttons").mouseenter(function() {
     validate_quiz();
   })
 })
