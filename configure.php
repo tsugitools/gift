@@ -51,6 +51,7 @@ $OUTPUT->flashMessages();
 ?>
 <form method="post">
 <div id="quiz_content"></div>
+<div class="validation-error-list warning" style="display:none"></div>
 <div class="quiz-controls">
   <select class="form-control question-type-select" id="question_type_select">
     <option value=""> -- Add a New Question -- </option>
@@ -69,6 +70,7 @@ $OUTPUT->footerStart();
 $OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_authoring'));
 ?>
 <script type="text/javascript" src="js/authoring.js"></script>
+<script type="text/javascript" src="js/validation.js"></script>
 <script>
 $(document).ready(()=> {
   // see if there's already a quiz saved in the JSON
@@ -83,6 +85,10 @@ $(document).ready(()=> {
       }
     }
   });
+
+  $(".quiz-controls").mouseenter(function() {
+    validate_quiz();
+  })
 })
 </script>
 <?php

@@ -13,6 +13,18 @@ h1 {
   background-color: $light-pink;
   border: 1px solid $dark-pink;
   border-radius: 5px;
+  color: $maroon;
+}
+
+.validation-error-list {
+  margin: auto;
+  padding: 1em;
+  width: 80%;
+
+  > p:first-child {
+    font-weight: bold;
+    text-align: center;
+  }
 }
 
 .question-container {
