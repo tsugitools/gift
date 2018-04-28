@@ -66,13 +66,16 @@ h1 {
 .truefalse-container {
   display: flex;
   justify-content: space-between;
-  margin-left: auto;
-  margin-right: 0;
   width: 25%;
 
   > * {
     margin: 0 .5em;
   }
+}
+
+.right {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .possible-answer {
