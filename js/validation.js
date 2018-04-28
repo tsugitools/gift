@@ -72,7 +72,7 @@ function validate_question(num) {
     }
   } else if ( q_type == "multiple_choice_question" || q_type == "multiple_answers_question") {
     // make sure there's at least one right answer checked for MC/MA questions
-    var checked_count = $(q_div + " [type='checkbox']:checked").length;
+    var checked_count = $(q_div + " .possible-answer > [type='checkbox']:checked").length;
     if (checked_count == 0) {
       $(q_div + " .question-content-container").addClass("warning");
       validation_errors.push("Question " + num + ": At least one correct answer must be provided.");
