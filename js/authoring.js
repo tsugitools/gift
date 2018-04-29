@@ -85,23 +85,6 @@ function addAnswer(div, template_name, answer_context={}) {
   lti_frameResize();
 }
 
-// Change the function of an answer button from "+" (add) to "-" (remove this option)
-// requires the id of the button to affect
-function repurposeButton(btn_id) {
-  // TODO: This feels really gross and messy - look at it again later
-  // get the numbers for the answer and question by parsing the button id
-  var answer_num = btn_id.split('_')[2];
-  answer_num = answer_num.charAt(answer_num.length-1);
-  var question_num = btn_id.split('_')[3];
-  question_num = question_num.charAt(question_num.length-1);
-
-  // re-assign the on-click value of the button and change the value it displays
-  $("#"+btn_id).attr("onclick",
-    "$('#possible_answer"+answer_num+"_question"+question_num+"').remove(); renumber_answers("+question_num+"); set_focus_on_lastinput('#content_question"+question_num+"');"
-  );
-  $("#"+btn_id).val("-");
-}
-
 // runs through all the provided answers for the given question number and modifies the
 // html so the answers are always numbered sequentially from 1 to X
 function renumber_answers(question_number) {
@@ -115,6 +98,13 @@ function renumber_answers(question_number) {
     var html = $(answers[i]).html();
     var new_html = html.replace(new RegExp(to_replace, 'g'), "answer" + (i+1));
     $(answers[i]).html(new_html);
+
+    // if this is not the last button, make sure the "+" button is display:none
+    if (i < answers.length-1) {
+      $(answers[i]).find("[name^=btn_add]").hide();
+    } else {
+      $(answers[i]).find("[name^=btn_add]").show();
+    }
   }
 }
 
