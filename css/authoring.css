@@ -1,18 +1,23 @@
 h1 {
   font-size: 18px; }
 
+fieldset {
+  width: 100%; }
+
 .warning {
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
   border-radius: 5px;
   color: #721c24; }
 
-.validation-error-list {
+.error-list {
   margin: auto;
   padding: 1em;
   width: 80%; }
-  .validation-error-list > p:first-child {
+  .error-list > p:first-child {
     font-weight: bold;
+    text-align: center; }
+  .error-list div {
     text-align: center; }
 
 .question-container {

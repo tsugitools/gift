@@ -24,21 +24,21 @@ function validate_quiz() {
   // Did we get any errors?
   if (validation_errors.length > 0) {
     // Yes, so show the error list
-    $(".validation-error-list").show();
+    $("#validation-error-list").show();
     // disable the save buttons
     $("input[name='save_quiz']").attr("disabled", "disabled");
     // set the text at the start of the div
-    $(".validation-error-list").html('<p>WARNING: Please fix the following errors before saving...</p>');
+    $("#validation-error-list").html('<p>WARNING: Please fix the following errors before saving...</p>');
 
     // Add each error as a seperate <p> element
     for (var i = 0; i < validation_errors.length; i++) {
       var p = $("<p></p>").text(validation_errors[i]);
-      $(".validation-error-list").append(p);
+      $("#validation-error-list").append(p);
     }
   }
   else {
     // No errors, so hide the error list and enable the "save" buttons
-    $(".validation-error-list").hide();
+    $("#validation-error-list").hide();
     $("input[name='save_quiz']").removeAttr("disabled");
   }
 }
