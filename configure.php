@@ -43,10 +43,10 @@ $OUTPUT->header();
 <?php
 $OUTPUT->bodyStart();
 $OUTPUT->topNav();
-echo('<span style="float: right; margin-bottom: 10px;">');
+echo('<div class="right">');
 echo('<a href="index.php" class="btn btn-default">Cancel</a> ');
 echo('<a href="old_configure.php" class="btn btn-default">Input GIFT Quiz Format</a> ');
-echo('</span>');
+echo('</div>');
 $OUTPUT->flashMessages();
 ?>
 <form method="post">
