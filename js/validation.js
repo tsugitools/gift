@@ -41,6 +41,7 @@ function validate_quiz() {
     $("#validation-error-list").hide();
     $("input[name='save_quiz']").removeAttr("disabled");
   }
+  lti_frameResize();
 }
 
 // Check the given question number to make sure there are no validation errors
