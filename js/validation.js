@@ -21,6 +21,11 @@ function validate_quiz() {
     }
   }
 
+  // is there at least one question in the quiz?
+  if ($(".question-container").length == 0) {
+    validation_errors.push("Quiz must contain at least one question");
+  }
+
   // Did we get any errors?
   if (validation_errors.length > 0) {
     // Yes, so show the error list
