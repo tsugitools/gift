@@ -119,7 +119,7 @@ $(document).ready(()=> {
     }
   });
 
-  $(".save-buttons").mouseenter(function() {
+  $(".save-buttons").click(function() {
     validate_quiz();
   })
 
