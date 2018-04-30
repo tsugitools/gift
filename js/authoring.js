@@ -131,6 +131,8 @@ function renumber_answers(question_number) {
       is_checked = true;
     }
 
+    save_values_to_html($("#question"+question_number));
+
     // update the entirety of the html for this div with the new answer
     var html = $(answers[i]).html();
     var new_html = html.replace(new RegExp(to_replace, 'g'), "answer" + (i+1));
@@ -153,7 +155,6 @@ function renumber_answers(question_number) {
 // In the event a question is deleted, run through the form and re-number all of the items
 // very similar to renumber_answers()
 function renumber_questions() {
-  console.log("renumber questions....");
   var questions = $("#quiz_content").children();
   for (var i = 0; i < questions.length; i++) {
     // get the string we need to replace later (question_)
@@ -162,10 +163,30 @@ function renumber_questions() {
     $(questions[i]).find("h1").text("Question " + (i+1));
     // change the id for the div
     questions[i].id = "question"+(i+1);
+
+    save_values_to_html(questions[i]);
+
     var html = $(questions[i]).html();
     var new_html = html.replace(new RegExp(to_replace, 'g'), "question"+(i+1));
     $(questions[i]).html(new_html);
   }
+}
+
+// the .html() function doesn't grab values which have been input by the user
+// since the form was rendered. This function grabs all of the user's values
+// and drops them in the default value property of each input so that they get
+// picked up
+// From https://stackoverflow.com/a/15825509
+function save_values_to_html(question_div) {
+  $(question_div).find("[type=text], textarea").each(function() {
+    this.defaultValue = this.value;
+  });
+  $(question_div).find('[type=checkbox], [type=radio]').each(function() {
+    this.defaultChecked = this.checked;
+  });
+  $(question_div).find('select option').each(function() {
+    this.defaultSelected = this.selected;
+  });
 }
 
 // -----------------------------------------------------------------------------
