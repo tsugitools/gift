@@ -99,10 +99,22 @@ function renumber_answers(question_number) {
     var to_replace = answers[i].id.split('_')[1];
     // update the id of the div for this with the new answer
     answers[i].id = answers[i].id.replace(to_replace, "answer" + (i+1));
+
+    // see if the checkbox was checked, since this property gets wiped in a sec
+    var is_checked = false;
+    if ($(answers[i]).find("[type=checkbox]:checked").length == 1) {
+      is_checked = true;
+    }
+
     // update the entirety of the html for this div with the new answer
     var html = $(answers[i]).html();
     var new_html = html.replace(new RegExp(to_replace, 'g'), "answer" + (i+1));
     $(answers[i]).html(new_html);
+
+    // if the checkbox was checked, re-check it here
+    if (is_checked) {
+      $(answers[i]).find("[type=checkbox]").prop("checked", true);
+    }
 
     // if this is not the last button, make sure the "+" button is display:none
     if (i < answers.length-1) {
