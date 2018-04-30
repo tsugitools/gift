@@ -64,7 +64,8 @@ fieldset {
 .possible-answer {
   align-items: center;
   display: flex;
-  margin: 0 auto; }
+  margin: 0 auto;
+  min-height: 48px; }
   .possible-answer > * {
     margin: 0 .5em; }
   .possible-answer > [type="text"] {

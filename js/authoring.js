@@ -45,6 +45,8 @@ function addMultipleChoice(context) {
   if ("parsed_answer" in context) {
     for (var a=0; a<context.parsed_answer.length; a++) {
       var answer_context = {};
+      // tell the template to skip adding the "+" button on the first answer option
+      answer_context.first = (a==0); 
       answer_context.isCorrect = context.parsed_answer[a][0];
       answer_context.value = context.parsed_answer[a][1];
       addAnswer('#content_question'+context.count, 'mc_authoring', answer_context)
@@ -63,6 +65,8 @@ function addShortAnswer(context) {
   if ("parsed_answer" in context) {
     for (var a=0; a<context.parsed_answer.length; a++) {
       var answer_context = {};
+      // tell the template to skip adding the "+" button on the first answer option
+      answer_context.first = (a==0);
       answer_context.value = context.parsed_answer[a][1];
       addAnswer('#content_question'+context.count, 'sa_authoring', answer_context)
     }
@@ -81,6 +85,7 @@ function addShortAnswer(context) {
 function addAnswer(div, template_name, answer_context={}) {
   answer_context.num = $(div).children().length + 1;
   answer_context.count = div.split("question")[1];
+  answer_context.first = (answer_context.num == 1);
   $(div).append(tsugiHandlebarsRender(template_name, answer_context))
   lti_frameResize();
 }
