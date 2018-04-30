@@ -235,9 +235,11 @@ $(document).ready(function(){
                 TEMPLATES[type] = template;
             }
             $('#quiz').append(template(question));
-
-
         }
+
+        // Resize the window in case we made it too long in the authoring form
+        lti_frameResize($(document.body).height()+50);
+
     }).fail( function() { alert('Unable to load quiz data'); } );
 });
 </script>
