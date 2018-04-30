@@ -6,7 +6,7 @@ $("#question_type_select").change(function() {
     var context = {};
     context.count = $("#quiz_content").children().length+1;
     switch(context.type) {
-      case "true_false_question": context.type = ""; break;
+      case "true_false_question": addTrueFalse(context); break;
       case "multiple_choice_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
       case "multiple_answers_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
       case "short_answer_question": addShortAnswer(context); break;
