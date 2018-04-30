@@ -5,6 +5,14 @@ $("#question_type_select").change(function() {
     // Create a new context for the templates
     var context = {};
     context.count = $("#quiz_content").children().length+1;
+    switch(context.type) {
+      case "true_false_question": context.type = ""; break;
+      case "multiple_choice_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
+      case "multiple_answers_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
+      case "short_answer_question": addShortAnswer(context); break;
+      default:
+    }
+
     context.type = selected_value;
     addQuestion(context);
     $("#question_type_select").val(""); // reset the dropdown
@@ -20,14 +28,30 @@ $("#question_type_select").change(function() {
       MC/MA/SA: "parsed_answer" (array of arrays, each in the form [bool, 'answer_text', '', 'question_id'])
 */
 function addQuestion(context) {
-  $('#quiz_content').append(tsugiHandlebarsRender('common', context))
-  switch (context.type) {
-    case "true_false_question": addTrueFalse(context); break;
-    case "multiple_choice_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
-    case "multiple_answers_question": addMultipleChoice(context); break; // Multiple choice and multiple answer are handled the same
-    case "short_answer_question": addShortAnswer(context); break;
+  switch(context.type) {
+    case "true_false_question":
+      context.PrettyType = "True/False";
+      $('#quiz_content').append(tsugiHandlebarsRender('common', context))
+      addTrueFalse(context);
+      break;
+    case "multiple_choice_question":
+      context.PrettyType = "Multiple Choice/Multiple Answer";
+      $('#quiz_content').append(tsugiHandlebarsRender('common', context))
+      addMultipleChoice(context);
+      break; // Multiple choice and multiple answer are handled the same
+    case "multiple_answers_question":
+      context.PrettyType = "Multiple Choice/Multiple Answer";
+      $('#quiz_content').append(tsugiHandlebarsRender('common', context))
+      addMultipleChoice(context);
+      break; // Multiple choice and multiple answer are handled the same
+    case "short_answer_question":
+      context.PrettyType = "Short Answer";
+      $('#quiz_content').append(tsugiHandlebarsRender('common', context))
+      addShortAnswer(context);
+      break;
     default: console.log("unrecognized question type: " + context.type);
   }
+
   lti_frameResize();
 }
 
@@ -47,7 +71,7 @@ function addMultipleChoice(context) {
     for (var a=0; a<context.parsed_answer.length; a++) {
       var answer_context = {};
       // tell the template to skip adding the "+" button on the first answer option
-      answer_context.first = (a==0); 
+      answer_context.first = (a==0);
       answer_context.isCorrect = context.parsed_answer[a][0];
       answer_context.value = context.parsed_answer[a][1];
       addAnswer('#content_question'+context.count, 'mc_authoring', answer_context)
