@@ -8,6 +8,7 @@ $("#question_type_select").change(function() {
     context.type = selected_value;
     addQuestion(context);
     $("#question_type_select").val(""); // reset the dropdown
+    set_focus_on_lastquestion();
   }
 });
 
@@ -151,4 +152,10 @@ function renumber_questions() {
 // Used when the user presses the "+" button to add a new answer option
 function set_focus_on_lastinput(sender) {
   $(sender + " div:last-child input[type=text]").focus();
+}
+
+// Set the cursor focus on the textarea of the last question in the form
+// Used when the user adds a new question to the quiz
+function set_focus_on_lastquestion() {
+  $("#quiz_content").children().last().find("textarea").focus();
 }
