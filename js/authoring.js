@@ -52,6 +52,8 @@ function addQuestion(context) {
     default: console.log("unrecognized question type: " + context.type);
   }
 
+  set_enabled_question_types("#question"+context.count+"_type_select", context.type);
+
   lti_frameResize();
 }
 
@@ -170,6 +172,44 @@ function renumber_questions() {
     var new_html = html.replace(new RegExp(to_replace, 'g'), "question"+(i+1));
     $(questions[i]).html(new_html);
   }
+}
+
+// Called by the question type selector in each question header.
+// Replaces the answer options with those of the newly selected type
+function change_question_type(question_num) {
+  var selected_value = $("#question"+question_num+"_type_select").val();
+  $("#question"+question_num+"_type_select").val(""); //reset the dropdown
+  if (selected_value != "") {
+    // Remove all of the answers in the content container
+    $("#content_question" + question_num).html("");
+
+    var template_type;
+    switch(selected_value) {
+      case "true_false_question": template_type="tf_authoring"; break;
+      case "multiple_choice_question": template_type="mc_authoring"; break;
+      case "multiple_answers_question": template_type="mc_authoring"; break;
+      case "short_answer_question": template_type="sa_authoring"; break;
+    }
+
+    addAnswer("#content_question" + question_num, template_type);
+
+    // Change the hidden question type value so the validator knows what to look for
+    $("#type_question" + question_num).val(selected_value);
+    // Disable the option that matches the new type and make sure the others are enabled
+    set_enabled_question_types("#question"+question_num+"_type_select", selected_value);
+  }
+}
+
+// For a given select element, set the option whose value matches disabled_type
+// to disabled and enable all of the others.
+function set_enabled_question_types(select_id, disabled_type) {
+  $(select_id).children().each(function() {
+    if (this.value == disabled_type) {
+      $(this).attr("disabled", "disabled");
+    } else {
+      $(this).removeAttr("disabled");
+    }
+  });
 }
 
 // the .html() function doesn't grab values which have been input by the user

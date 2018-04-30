@@ -80,7 +80,7 @@ if ($results_rows) {
     <div id="quiz_content"></div>
     <div id="validation-error-list" class="error-list warning" style="display:none"></div>
     <div class="quiz-controls">
-      <select class="form-control question-type-select" id="question_type_select" autofocus>
+      <select class="form-control add-question-type-select" id="question_type_select" autofocus>
         <option value=""> -- Add a New Question -- </option>
         <option value="true_false_question">True/False Question</option>
         <option value="multiple_choice_question">Multiple Choice/Multiple Answer Question</option>

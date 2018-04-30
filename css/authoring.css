@@ -71,7 +71,11 @@ fieldset {
   .possible-answer > [type="text"] {
     width: 50%; }
 
-.question-type-select {
+.question-controls {
+  align-items: center;
+  display: flex; }
+
+.add-question-type-select {
   margin: .5em;
   width: 66%; }
 
