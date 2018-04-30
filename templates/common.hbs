@@ -3,7 +3,7 @@
     <h1 class="question-title">{{__ 'Question'}} {{count}} (<span id="question{{count}}">{{PrettyType}}</span>)</h1>
     <div class="question-controls">
       <select class="form-control question-type-select" id="question{{count}}_type_select"
-        onchange="change_question_type({{count}})"
+        onchange="change_question_type('#question{{count}}')"
       >
         <option value=""> -- Change Question Type -- </option>
         <option value="true_false_question">True/False Question</option>

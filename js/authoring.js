@@ -176,7 +176,8 @@ function renumber_questions() {
 
 // Called by the question type selector in each question header.
 // Replaces the answer options with those of the newly selected type
-function change_question_type(question_num) {
+function change_question_type(question_div) {
+  var question_num = question_div.split("question")[1];
   var selected_value = $("#question"+question_num+"_type_select").val();
   $("#question"+question_num+"_type_select").val(""); //reset the dropdown
   if (selected_value != "") {
