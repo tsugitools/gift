@@ -103,7 +103,12 @@ fieldset {
   }
 }
 
-.question-type-select {
+.question-controls {
+  align-items: center;
+  display: flex;
+}
+
+.add-question-type-select {
   margin: .5em;
   width: 66%;
 }
