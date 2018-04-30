@@ -26,7 +26,7 @@
   <label for="text_question{{count}}">{{__ 'Question Text:'}}</label>
   <textarea rows="4" class="form-control" name="text_question{{count}}">{{question}}</textarea>
   <input type="hidden" name="type_question{{count}}" value="{{type}}">
-  <label for="html_question{{count}}" class="right">
+  <label for="html_question{{count}}" class="right" style="display:none">
     <input type="checkbox" name="html_question{{count}}" {{#if html}}checked{{/if}}>
     Use HTML in question text
   </label>
