@@ -128,7 +128,28 @@ function parse_gift($text, &$questions, &$errors) {
         $correct_answers = 0;
         $incorrect_answers = 0;
         // Also will be multiple_answer_question and short_answer_question
-        if ( $type == 'multiple_choice_question') {
+        if ( $type == 'true_false_question') {
+            if (strpos($answer, "#") > 0) {
+                $feedback = explode('#', $answer);
+                if (sizeof($feedback) === 3) {
+                    // the first feedback is always if they got it wrong, the second if they got it right
+                    $parsed_answer = array(
+                        array(
+                          0 => false,
+                          2 => $feedback[1]
+                        ),
+                        array(
+                          0 => 1,
+                          2 => $feedback[2]
+                        )
+                    );
+                } else {
+                    $errors[] = "malformed True/False feedback: ".$raw;
+                }
+            } else {
+              // No feedback is provided
+            }
+        } else if ( $type == 'multiple_choice_question') {
             $parsed_answer = array();
             $correct = null;
             $answer_text = false;
