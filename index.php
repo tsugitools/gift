@@ -135,6 +135,9 @@ if ( count($_POST) > 0 ) {
 
 // View
 $OUTPUT->header();
+?>
+<link rel="stylesheet" type="text/css" href="css/feedback.css">
+<?php
 $OUTPUT->bodyStart();
 $OUTPUT->topNav();
 
