@@ -36,6 +36,9 @@ if ( isset($_GET['quiz']) && $USER->instructor ) {
     $_SESSION['default_quiz'] = $_GET['quiz'];
 }
 
+// Load the settings from defaults on first launch
+$LAUNCH->link->settingsDefaultsFromCustom(array('tries', 'delay'));
+
 // Get the settings
 $max_str = Settings::linkGet('tries');
 $max_tries = 0;
