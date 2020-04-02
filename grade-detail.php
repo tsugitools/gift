@@ -11,7 +11,7 @@ $row = GradeUtil::gradeLoad($_REQUEST['user_id']);
 
 
 $menu = new \Tsugi\UI\MenuSet();
-$menu->addLeft('Back to all grades', "index.php");
+$menu->addLeft('Back to all grades', "grades.php");
 
 // View
 $OUTPUT->header();

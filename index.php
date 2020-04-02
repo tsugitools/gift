@@ -136,9 +136,10 @@ if ( count($_POST) > 0 ) {
     return;
 }
 
-$menu = new \Tsugi\UI\MenuSet();
 
+$menu = false;
 if ( $USER->instructor ) {
+    $menu = new \Tsugi\UI\MenuSet();
     $menu->addLeft('Student Data', 'grades.php');
     $menu->addRight('Edit Quiz Content', 'configure');
     if ( $CFG->launchactivity ) {
