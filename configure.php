@@ -108,10 +108,13 @@ if ( $gift === false || strlen($gift) < 1 ) {
     }
 }
 
+$menu = new \Tsugi\UI\MenuSet();
+$menu->addLeft('Back', 'index.php');
+
 // View
 $OUTPUT->header();
 $OUTPUT->bodyStart();
-$OUTPUT->topNav();
+$OUTPUT->topNav($menu);
 $OUTPUT->flashMessages();
 ?>
 <p>Be careful in making any changes if this quiz has submissions.</p>
