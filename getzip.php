@@ -1,17 +1,12 @@
 <?php
 
-require_once "../config.php";
 require_once "parse.php";
-
-use \Tsugi\Util\LTI;
-use \Tsugi\Core\Settings;
-use \Tsugi\Core\LTIX;
-use \Tsugi\UI\SettingsForm;
-
 require_once "util.php";
+
 date_default_timezone_set('UTC');
 if ( isset($_GET[session_name()]) ) session_id($_GET[session_name()]);
 session_start();
+
 if ( !isset($_SESSION['quiz']) ) {
     error_log('GIFT2QTI Missing quiz data '.curPageUrl());
     die('GIFT2QTI Missing quiz data');
@@ -21,7 +16,7 @@ $quiz_id = 'i'.uniqid();
 $today = date('Y-m-d');
 $ref_id = 'r'.uniqid();
 $manifest_id = 'm'.uniqid();
-$title = isset($_SESSION['title']) ? htmlent_utf8($_SESSION['title']) : 'Converted by the Gift2QTI Converter';
+$title = isset($_SESSION['title']) ? htmlentities($_SESSION['title']) : 'Converted by the Gift2QTI Converter';
 $desc = "Description goes here";
 $source = array("__DATE__", "__QUIZ_ID__","__REF_ID__", "__TITLE__","__DESCRIPTION__", "__MANIFEST_ID__");
 $dest = array($today, $quiz_id, $ref_id, $title, $desc, $manifest_id);
