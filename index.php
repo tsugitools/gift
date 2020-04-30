@@ -141,7 +141,8 @@ $menu = false;
 if ( $USER->instructor ) {
     $menu = new \Tsugi\UI\MenuSet();
     $menu->addLeft('Student Data', 'grades.php');
-    $menu->addRight('Edit Quiz Content', 'configure');
+    $menu->addRight('Edit Quiz', 'configure');
+    $menu->addRight('Export', 'export');
     if ( $CFG->launchactivity ) {
         $menu->addRight('Analytics', 'analytics');
     }

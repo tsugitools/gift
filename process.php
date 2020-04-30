@@ -1,5 +1,6 @@
 <?php
 
+require_once "../config.php";
 require_once "util.php";
 
 session_start();
@@ -51,8 +52,8 @@ Conversion complete...
 
 </pre>
 <p>
-<a href="viewxml.php" target="_blank">View Quiz XML</a> |
-<a href="getzip.php" target="_blank">Download ZIP</a>
+<a href="<?= addSession('viewxml.php') ?>" target="_blank">View Quiz XML</a> |
+<a href="<?= addSession('getzip.php') ?>" target="_blank">Download ZIP</a>
     <?php
     if (isset($_SESSION['content_item_return_url'])){
         if ( isset($_POST['title']) ) {

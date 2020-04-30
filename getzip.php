@@ -1,4 +1,13 @@
 <?php
+
+require_once "../config.php";
+require_once "parse.php";
+
+use \Tsugi\Util\LTI;
+use \Tsugi\Core\Settings;
+use \Tsugi\Core\LTIX;
+use \Tsugi\UI\SettingsForm;
+
 require_once "util.php";
 date_default_timezone_set('UTC');
 if ( isset($_GET[session_name()]) ) session_id($_GET[session_name()]);

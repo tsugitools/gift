@@ -1,9 +1,5 @@
 <?php
 
-function htmlent_utf8($string) {
-    return htmlentities($string,ENT_QUOTES,$encoding = 'UTF-8');
-}
-
 function curPageURL() {
     $pageURL = (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != "on")
              ? 'http'
