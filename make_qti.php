@@ -233,7 +233,10 @@ echo "\nValidating (may take a few seconds)...\n";
 libxml_use_internal_errors(true);
 if ( isset($_SESSION['novalidate']) ) {
     echo "\nContent validation bypassed...\n";
-} else if ( ! $DOM->schemaValidate('xml/ims_qtiasiv1p2p1.xsd') ) {
+    return;
+}
+
+if ( ! $DOM->schemaValidate('xml/ims_qtiasiv1p2p1.xsd') ) {
     echo "\nWarning: Quiz XML Not Valid\n";
     $errors = libxml_get_errors();
     foreach ($errors as $error) {
@@ -243,4 +246,3 @@ if ( isset($_SESSION['novalidate']) ) {
 } else { 
     echo "\nQuiz XML validated\n";
 }
-

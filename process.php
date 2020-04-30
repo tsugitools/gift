@@ -1,6 +1,7 @@
 <?php
 
-require_once "../config.php";
+// Note that somehow including config.php here blows up the XML validation...
+
 require_once "util.php";
 
 session_start();
@@ -21,7 +22,6 @@ require_once("parse.php");
 $questions = array();
 $errors = array();
 parse_gift($text, $questions, $errors);
-
 
 if ( count($questions) < 1 ) {
     print "No questions found.";
@@ -47,34 +47,18 @@ if ( !isset($DOM) ) die("Conversion not completed");
 $_SESSION['quiz'] = $DOM->saveXML();
 $_SESSION['uuid'] = $uuid;
 
+$add_session = '?' . session_name() . '=' . session_id();
+
 ?>
 Conversion complete...
 
 </pre>
 <p>
-<a href="<?= addSession('viewxml.php') ?>" target="_blank">View Quiz XML</a> |
-<a href="<?= addSession('getzip.php') ?>" target="_blank">Download ZIP</a>
-    <?php
-    if (isset($_SESSION['content_item_return_url'])){
-        if ( isset($_POST['title']) ) {
-          $name = $_POST['title'];
-        } else{
-          $name = 'Gift Quiz';
-        }
-        $abs_url = str_replace("convert.php", "getzip.php?", curPageURL());
-        $return_url = htmlspecialchars($_SESSION['content_item_return_url']) .
-          "?return_type=file&text=". htmlspecialchars($name) . "&url=" .
-          urlencode(htmlspecialchars($abs_url . session_name() . '='. session_id() ));
-        ?>
-         | <a href="<?php echo $return_url ?>" target="_parent">Return Zip to LMS</a>
-    <?php
-    }
-    ?>
+<a href="viewxml.php<?= $add_session ?>" target="_blank">View Quiz XML</a> |
+<a href="getzip.php<?= $add_session ?>" target="_blank">Download ZIP</a>
 </p>
 <p>
 To upload to an LMS choose the ZIP format - it makes a small IMS Common Cartridge
 with just the quiz in it - and it is what most LMS systems prefer to import (i.e.
-they don't want you to upload the XML directly).
+they are not usually capable of importing the actual QTI XML directly).
 </p>
-
-

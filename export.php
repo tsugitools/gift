@@ -13,13 +13,15 @@ require_once "util.php";
 $LAUNCH = LTIX::requireData();
 if ( ! $USER->instructor ) die('Instructor only');
 
-$config_url = str_replace("export.php", "lti_config.php", curPageUrl());
-
 // Load the quiz
 $text = $LAUNCH->link->getJson();
 
 $menu = new \Tsugi\UI\MenuSet();
 $menu->addLeft('Back', 'index.php');
+
+$fname = preg_replace( '/[\W]/', '_', $LAUNCH->link->title);
+$fname = str_replace( '___', '_', $fname);
+$fname = str_replace( '__', '_', $fname);
 
 $OUTPUT->header();
 $OUTPUT->bodyStart();
@@ -35,7 +37,7 @@ This is an experimental feature to convert your quiz to
 <input type="submit" name="submit" class="btn btn-primary" value="Convert GIFT to QTI"
 onclick="$('#myModal').modal('show');"></p>
 <p>Quiz Title: <input type="text" name="title" size="60" value="<?= $LAUNCH->link->title ?>"/></p>
-<p>Quiz File Name (no suffix): <input type="text" name="name" size="30"/> (optional)</p>
+<p>Quiz File Name (no suffix): <input type="text" name="name" size="30" value="<?= $fname ?>"/> (optional)</p>
 <textarea rows="30" style="width: 98%" name="text">
 <?= htmlent_utf8($text); ?>
 </textarea>
@@ -53,7 +55,7 @@ Do not validate the XML</p>
         <h4 class="modal-title" id="myModalLabel">Converting to QTI...</h4>
       </div>
       <div class="modal-body">
-        <iframe id="working" name="working" src="waiting.php" style="width:90%; height: 400px"></iframe>
+        <iframe id="working" name="working" src="waiting.php" style="width:100%; height: 400px"></iframe>
       </div>
     </div>
   </div>

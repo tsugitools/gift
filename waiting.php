@@ -1,7 +1,8 @@
-<div style="
-position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%);">
+<center>
+<p>
+Converting GIFT format to QTI...
+</p>
+<p>
 <img src="ajax-loader.gif">
-</div>
+</p>
+</center>
