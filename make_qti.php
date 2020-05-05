@@ -82,16 +82,13 @@ foreach($questions as $question) {
     $presentation = $item->addChild("presentation");
     $material = $presentation->addChild("material");
     $questext = $question->question;
-    if ( strpos($questext,"[html]") === 0 ) {
-        // Here we are depending on 
-        $questext = ltrim(substr($questext,6));
-        // $questext = xml_double_encode_string($questext);
+    if ( isset($question->html) && $question->html ) {
+        // Pass - leave it aone
     } else {
         $questext = ltrim($questext);
         $questext = xml_double_encode_string($questext);
         //$questext = plain_to_html_in_xml($questext);
     }
-    // $mattext = $material->addChild("mattext", $questext);
     $mattext = $material->addChild("mattext");
     $material->mattext = $questext;
     $mattext->addAttribute("texttype", 'text/html');
