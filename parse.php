@@ -128,28 +128,7 @@ function parse_gift($text, &$questions, &$errors) {
         $correct_answers = 0;
         $incorrect_answers = 0;
         // Also will be multiple_answer_question and short_answer_question
-        if ( $type == 'true_false_question') {
-            if (strpos($answer, "#") > 0) {
-                $feedback = explode('#', $answer);
-                if (sizeof($feedback) === 3) {
-                    // the first feedback is always if they got it wrong, the second if they got it right
-                    $parsed_answer = array(
-                        array(
-                          0 => false,
-                          2 => $feedback[1]
-                        ),
-                        array(
-                          0 => 1,
-                          2 => $feedback[2]
-                        )
-                    );
-                } else {
-                    $errors[] = "malformed True/False feedback: ".$raw;
-                }
-            } else {
-              // No feedback is provided
-            }
-        } else if ( $type == 'multiple_choice_question') {
+        if ( $type == 'multiple_choice_question') {
             $parsed_answer = array();
             $correct = null;
             $answer_text = false;
@@ -245,6 +224,7 @@ function parse_gift($text, &$questions, &$errors) {
         $qobj->name = $name;
         if ( strpos($question,'[html]') === 0 ) {
             $question = ltrim(substr($question,6));
+            $qobj->html = true;
         } else {
             $question = htmlentities($question);
         }
@@ -305,11 +285,6 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
             if ( isset($submit[$q_code]) ) {
                 $nq->value_true = $submit[$q_code] == 'T';
                 $nq->value_false = $submit[$q_code] == 'F';
-                if ($nq->value_true) {
-                    $nq->feedback = $question->parsed_answer[1][2];
-                } else {
-                    $nq->feedback = $question->parsed_answer[0][2];
-                }
             }
         }
 
@@ -325,7 +300,6 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                     if ( strcasecmp($sub, $ans) == 0 ) {
                         $score = 1;
                         $correct = true;
-                        $nq->feedback = $answer[2];
                         break;
                     }
                 }
@@ -365,14 +339,12 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                 $expected = $answer[0];  // An actual boolean
                 $ans->text = $answer[1];
                 $a_code = $answer[3];
-                $ans->feedback = $answer[2]; // add any feedback if it's included in the question
                 $ans->code = $a_code;
                 if ( $value == $a_code ) {
                     $ans->checked = true;
                     if ( $doscore && $expected ) {
                         $correct = true;
                         $score = 1;
-                        $ans->correct = true;
                     }
                 }
                 $answers[] = $ans;
@@ -395,7 +367,6 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                 $ans->text = $answer[1];
                 $a_code = $answer[3];
                 $expected = $answer[0];  // An actual boolean
-                $ans->feedback = $answer[2]; // add any feedback if it's included in the question
                 $oneanswer = $oneanswer || isset($submit[$a_code]);
                 $ans->checked = isset($submit[$a_code]);
 
@@ -403,21 +374,19 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                 if (isset($submit[$a_code])) {  // If the user checked the box for this answer...
                   if ($expected){               // And the answer was supposed to be checked
                     $actual = true;             // Then the user should get a point towards the score
-                    $ans->correct = true;
                   }
                 } else {                        // If the user did NOT check this box...
                   if (!$expected){              // And the answer was not supposed to be checked
                     $actual = true;             // Then the user should get a point
-                    $ans->correct = false;
                   }
                 }
 
                 if ( $actual ) $got++;          // $actual is true if the user gave the correct option
                 $need++;
                 $ans->code = $a_code;
-                // if ( $doscore ) {            // removed - doesn't appear to be needed anymore?
-                //     $ans->correct = $actual == $expected;
-                // }
+                if ( $doscore ) {
+                    $ans->correct = $actual == $expected;
+                }
                 $answers[] = $ans;
             }
             if ( $doscore ) {

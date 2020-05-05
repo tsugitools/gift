@@ -1,9 +1,9 @@
 <?php
 
 $REGISTER_LTI2 = array(
-"name" => "Quizzes",
-"FontAwesome" => "fa-gift",
-"short_name" => "Quizzes",
+"name" => "Quizzes II",
+"FontAwesome" => "fa-question-circle",
+"short_name" => "QuizzesII",
 "description" => "This tool provides a quiz engine that supports the GIFT format.
 GIFT is a line-oriented plain text question format that is simple to understand
 and easily edited by hand or even stored in a repository like github.",

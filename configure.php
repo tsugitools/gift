@@ -1,7 +1,7 @@
 <?php
 require_once "../config.php";
 require_once "parse.php";
-require_once "sample.php";
+require_once "configure_parse.php";
 
 use \Tsugi\Core\Cache;
 use \Tsugi\Core\LTIX;
@@ -13,145 +13,126 @@ if ( ! $USER->instructor ) die("Requires instructor role");
 // Model
 $p = $CFG->dbprefix;
 
-// If they pressed Submit on the quiz content
-if ( isset($_POST['gift']) ) {
-    $gift = $_POST['gift'];
-    $_SESSION['gift'] = $gift;
+// check to see if there are results from this link already
+$results_rows = $PDOX->allRowsDie("SELECT result_id, R.link_id AS link_id, R.user_id AS user_id, M.role as role,
+                sourcedid, service_id, grade, note, R.json AS json, R.note AS note
+            FROM lti_result AS R
+            JOIN lti_link AS L ON L.link_id = R.link_id AND R.link_id = :LI
+            JOIN lti_context AS C ON L.context_id = C.context_id AND C.context_id = :CI
+            JOIN lti_membership AS M ON R.user_id = M.user_id AND C.context_id = M.context_id
+            WHERE L.link_id = :LI AND M.role = 0 AND R.json IS NOT NULL",
+            array(':LI'=>$LINK->id, ':CI'=>$CONTEXT->id));
 
-    // Some sanity checking...
-    $retval = check_gift($gift);
-    if ( ! $retval ) {
-        header( 'Location: '.addSession('configure.php') ) ;
-        return;
-    }
+if (!empty($_POST)) {
 
-    // This is not JSON - no one cares
-    $LINK->setJson($gift);
-    $_SESSION['success'] = 'Quiz updated';
-    unset($_SESSION['gift']);
+  $gift = parse_configure_post();
+
+  // Sanity check
+  $retval = check_gift($gift);
+  if ( ! $retval ) {
+      header( 'Location: '.addSession('configure.php') ) ;
+      return;
+  }
+
+  $LINK->setJson($gift);
+  $_SESSION['success'] = 'Quiz updated';
+  if ($_POST['save_quiz'] == "Save and Return") {
     header( 'Location: '.addSession('index.php') ) ;
     return;
-}
-
-// Check to see if we are supposed to preload a quiz
-$files = false;
-$lock = false;
-if ( isset ($CFG->giftquizzes) && is_dir($CFG->giftquizzes) ) {
-    $files1 = scandir($CFG->giftquizzes);
-    $files = array();
-    foreach($files1 as $file) {
-        if ( $file == '.lock' ) {
-            $lock = trim(file_get_contents($CFG->giftquizzes.'/'.$file));
-            continue;
-        }
-        if ( strpos($file, '.') === 0 ) continue;
-        $files[] = $file;
-    }
-    sort($files);
-}
-if ( $files && count($files) < 1 ) {
-    $_SESSION['error'] = "Found no files in ".$CFG->giftquizzes;
-    header( 'Location: '.addSession('configure.php') ) ;
-    return;
-}
-// print_r($files);
-// echo("LOCK = ".$lock);
-
-$default = isset($_SESSION['default_quiz']) ? $_SESSION['default_quiz'] : false;
-
-// Load up the selected file
-if ( $files && isset($_POST['file']) ) {
-    $key = isset($_POST['lock']) ? $_POST['lock'] : false;
-    if ( $lock && $lock != $key ) {
-        $_SESSION['error'] = 'Incorrect password';
-        header( 'Location: '.addSession('configure.php') ) ;
-        return;
-    }
-
-    $name = $_POST['file'];
-    if ( ! in_array($name, $files) ) {
-        $_SESSION['error'] = 'Quiz file not found: '.$_POST['file'];
-        header( 'Location: '.addSession('configure.php') ) ;
-        return;
-    }
-
-    $gift = file_get_contents($CFG->giftquizzes.'/'.$name);
-    $_SESSION['gift'] = $gift;
-
-    // Also pre-check for sanity
-    $retval = check_gift($gift);
-    if ( ! $retval ) {
-        header( 'Location: '.addSession('configure.php') ) ;
-        return;
-    }
-
-    $_SESSION['success'] = 'Preloaded quiz content from file. Make sure to save the quiz below.';
-    header( 'Location: '.addSession('configure.php') ) ;
-    return;
-}
-
-// Load up the quiz from session or DB
-if ( isset($_SESSION['gift']) ) { 
-    $gift = $_SESSION['gift'];
-    unset($_SESSION['gift']);
-} else {
-    $gift = $LINK->getJson();
-}
-
-// Clean up the JSON for presentation
-if ( $gift === false || strlen($gift) < 1 ) {
-    if ( is_array($default) && $lock == false && in_array($default, $files) ) {
-        $gift = file_get_contents($CFG->giftquizzes.'/'.$default);
-        $_SESSION['success'] = 'Loaded quiz '.$default.' as default';
-    } else {
-        $gift = getSampleGIFT();
-    }
+  }
+  header( 'Location: '.addSession('configure.php') ) ;
+  return;
 }
 
 $menu = new \Tsugi\UI\MenuSet();
 $menu->addLeft('Back', 'index.php');
+$menu->addRight('Edit Raw GIFT', 'old_configure.php');
 
 // View
 $OUTPUT->header();
+?>
+<link rel="stylesheet" type="text/css" href="css/authoring.css">
+<?php
 $OUTPUT->bodyStart();
 $OUTPUT->topNav($menu);
 $OUTPUT->flashMessages();
 ?>
-<p>Be careful in making any changes if this quiz has submissions.</p>
-<?php 
-if ( $files !== false ) {
-echo("<form method=\"post\">\n");
-// echo('<select name="file" onchange="console.dir(this); if(this.value!=0) this.form.submit();">'."\n");
-echo('<select name="file">'."\n");
-echo('<option value="0">Select Quiz</option>'."\n");
-foreach($files as $file) {
-    if ( $default && $default == $file ) {
-        echo('<option value="'.htmlentities($file).'" selected>'.htmlentities($file).'</option>'."\n");
-    } else {
-        echo('<option value="'.htmlentities($file).'">'.htmlentities($file).'</option>'."\n");
-    }
-}
-echo("</select>\n");
-if ( $lock != false ) {
-    echo('<input type="password" name="lock"> Password ');
-}
-echo('<input type="submit" value="Load Quiz">');
-echo("</form>\n");
+<form method="post">
+<?php
+// If we found results rows that weren't empty earlier, show a warning and disable the entire form
+if ($results_rows) {
+?>
+  <div id="warning_for_edit_with_results" class="error-list warning">
+    <p>WARNING: Results have already been recorded for this quiz - are you sure you want to make changes?</p>
+    <div>
+      <input type="button" class="btn btn-danger" id="confirm_edit_with_results" value="Yes, I want to make changes...">
+    </div>
+  </div>
+  <fieldset disabled="disabled">
+<?php
+} else {
+  // We didn't find any results, so just make the form normally
+?>
+  <fieldset>
+<?php
 }
 ?>
-<p>
-The assignment is configured by carefully editing the gift below.
-The documentation for the GIFT format comes from 
-<a href="https://docs.moodle.org/29/en/GIFT_format" target="_blank">Moodle Documentation</a>.
-</p>
-<form method="post" style="margin-left:5%;">
-<textarea name="gift" rows="25" cols="80" style="width:95%" >
-<?php echo(htmlent_utf8($gift)); ?>
-</textarea>
-<p>
-<input type="submit" value="Save">
-<input type=submit name=doCancel onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
+    <div id="quiz_content"></div>
+    <div id="validation-error-list" class="error-list warning" style="display:none"></div>
+    <div class="quiz-controls">
+      <select class="form-control add-question-type-select" id="question_type_select" autofocus>
+        <option value=""> -- Add a New Question -- </option>
+        <option value="true_false_question">True/False Question</option>
+        <option value="multiple_choice_question">Multiple Choice/Multiple Answer Question</option>
+        <option value="short_answer_question">Short Answer Question</option>
+        <!-- <option value="essay_question">Essay Question</option> -->
+      </select>
+      <input type="submit" class="btn btn-default" name="save_quiz" value="Save">
+      <input type="submit" class="btn btn-default" name="save_quiz" value="Save and Return">
+      <input type=submit name=doCancel class="btn btn-default" onclick="location='<?php echo(addSession('index.php'));?>'; return false;" value="Cancel"></p>
+      <!-- <input type=submit name=view onclick="location='<?php echo(addSession('quiz_data.php'));?>'; return false;" value="View JSON"></p> -->
+    </div>
+  </fieldset>
 </form>
-<?php
 
-$OUTPUT->footer();
+<?php
+$OUTPUT->footerStart();
+$OUTPUT->templateInclude(array('common', 'tf_authoring', 'mc_authoring', 'sa_authoring'));
+?>
+<script type="text/javascript" src="js/authoring.js"></script>
+<script type="text/javascript" src="js/validation.js"></script>
+<script>
+$(document).ready(()=> {
+  // see if there's already a quiz saved in the JSON
+  $.getJSON("<?= addSession('quiz_data.php') ?>", function(quizData) {
+    if (!quizData) {
+      console.log("No quiz is configured");
+    } else {
+      for (var q=0; q<quizData.length;q++) {
+        var context = quizData[q];
+        // decode htmlentities - from https://stackoverflow.com/a/10715834
+        context.question = $('<textarea/>').html(context.question).text();
+        context.count = $("#quiz_content").children().length+1;
+        addQuestion(context);
+      }
+    }
+  });
+
+  $(".save-buttons").click(function() {
+    validate_quiz();
+  })
+
+  $("#quiz_content").change(function() {
+    validate_quiz();
+  });
+
+  // In the event the confirmation div appears at the top of the form
+  // Pressing the button will hide the div and enable the form
+  $("#confirm_edit_with_results").click(function() {
+    $("#warning_for_edit_with_results").hide();
+    $("fieldset").removeAttr("disabled");
+  });
+})
+</script>
+<?php
+$OUTPUT->footerEnd();
