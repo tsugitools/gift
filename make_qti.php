@@ -82,16 +82,15 @@ foreach($questions as $question) {
     $presentation = $item->addChild("presentation");
     $material = $presentation->addChild("material");
     $questext = $question->question;
+    $mattext = $material->addChild("mattext");
     if ( isset($question->html) && $question->html ) {
-        // Pass - leave it aone
+        $material->mattext = $questext;
+        $mattext->addAttribute("texttype", 'text/html');
     } else {
         $questext = ltrim($questext);
-        $questext = xml_double_encode_string($questext);
-        //$questext = plain_to_html_in_xml($questext);
+        $material->mattext = $questext;
+        $mattext->addAttribute("texttype", 'text/plain');
     }
-    $mattext = $material->addChild("mattext");
-    $material->mattext = $questext;
-    $mattext->addAttribute("texttype", 'text/html');
 
     if ( $question->type == 'true_false_question' ) {
 
@@ -153,7 +152,8 @@ foreach($questions as $question) {
             $response_label->addAttribute('ident', $val);
             $material = $response_label->addChild("material");
             $mattext = $material->addChild("mattext");
-            $material->mattext = $parsed_answer[1];
+            $material->mattext = xml_double_encode_string($parsed_answer[1]);
+            // $material->mattext = plain_to_html_in_xml($parsed_answer[1]);
             $mattext->addAttribute("texttype", "text/plain");
         }
 
