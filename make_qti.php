@@ -50,6 +50,10 @@ function html_in_xml_replace_char($arr1)
     return $arr1;
 }
 
+// Sadly, some LMS's get confused with text/plain even thought it is the default
+// across QTI examples :)
+$htmlhack = isset($_SESSION['htmlhack']);
+
 // Somehow simplexml_load_file() seems to get confused now and then..
 $data = file_get_contents(getcwd().'/xml/assessment.xml');
 $QTI = simplexml_load_string($data);
@@ -86,10 +90,17 @@ foreach($questions as $question) {
     if ( isset($question->html) && $question->html ) {
         $material->mattext = $questext;
         $mattext->addAttribute("texttype", 'text/html');
-    } else {
+    } else { // Plain text
         $questext = ltrim($questext);
-        $material->mattext = $questext;
-        $mattext->addAttribute("texttype", 'text/plain');
+        // Already in htmlentities :( TODO: Fix this
+        $questext = html_entity_decode($questext);
+        if ( $htmlhack ) {
+            $material->mattext = xml_double_encode_string($questext); 
+            $mattext->addAttribute("texttype", 'text/html');
+        } else {
+            $material->mattext = $questext;
+            $mattext->addAttribute("texttype", 'text/plain');
+        }
     }
 
     if ( $question->type == 'true_false_question' ) {
@@ -152,9 +163,15 @@ foreach($questions as $question) {
             $response_label->addAttribute('ident', $val);
             $material = $response_label->addChild("material");
             $mattext = $material->addChild("mattext");
-            $material->mattext = xml_double_encode_string($parsed_answer[1]);
-            // $material->mattext = plain_to_html_in_xml($parsed_answer[1]);
-            $mattext->addAttribute("texttype", "text/plain");
+            // In GIFT land, all answers are plaintext
+            if ( $htmlhack ) {
+                // Both HTML Entities and Ampersand encoding
+                $material->mattext = xml_double_encode_string($parsed_answer[1]);
+                $mattext->addAttribute("texttype", "text/html");
+            } else { // The right way
+                $material->mattext = $parsed_answer[1];
+                $mattext->addAttribute("texttype", "text/plain");
+            }
         }
 
         $resprocessing = $item->addChild("resprocessing");
