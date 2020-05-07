@@ -9,12 +9,14 @@ unset($_SESSION['quiz']);
 unset($_SESSION['title']);
 unset($_SESSION['name']);
 unset($_SESSION['novalidate']);
+unset($_SESSION['htmlhack']);
 if ( !isset($_POST['text']) ) die('Missing input data');
 $text =  $_POST['text'];
 if ( isset($_POST['title']) ) $_SESSION['title'] = $_POST['title'];
 if ( isset($_POST['name']) ) $_SESSION['name'] = $_POST['name'];
 
 if ( isset($_POST['bypass']) ) $_SESSION['novalidate'] = 'bypass';
+if ( isset($_POST['htmlhack']) ) $_SESSION['htmlhack'] = 'true';
 
 echo("<pre>\n");
 require_once("parse.php");

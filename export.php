@@ -41,6 +41,8 @@ This is an experimental feature to convert your quiz to
 </textarea>
 <p><input type="checkbox" name="bypass" value="bypass">
 Do not validate the XML</p>
+<p><input type="checkbox" name="htmlhack" value="htmlhack">
+LMS Does not handle text/plain well (Canvas / Coursera)</p>
 <input type="submit" name="submit" class="btn btn-primary" value="Convert GIFT to QTI"
 onclick="$('#myModal').modal('show');"></p>
 </form>
