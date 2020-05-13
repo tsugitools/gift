@@ -6,7 +6,8 @@ $REGISTER_LTI2 = array(
 "short_name" => "Quizzes",
 "description" => "This tool provides a quiz engine that supports the GIFT format.
 GIFT is a line-oriented plain text question format that is simple to understand
-and easily edited by hand or even stored in a repository like github.",
+and easily edited by hand or even stored in a repository like github.  The quizzes can
+be exported into QTI 1.2 format for import into other systems.",
 "messages" => array("launch", "launch_grade"),
  "privacy_level" => "anonymous",  // anonymous, name_only, public
     "license" => "Apache",
