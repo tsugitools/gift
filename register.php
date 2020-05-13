@@ -27,6 +27,7 @@ be exported into QTI 1.2 format for import into other systems.",
         "tool_configuration", "user_navigation"
         */
     ),
+    "video" => "https://www.youtube.com/watch?v=Zfh-G0tlkgc",
     "screen_shots" => array(
         "store/screen-01.png",
         "store/screen-02.png",
