@@ -16,10 +16,10 @@ $p = $CFG->dbprefix;
 // check to see if there are results from this link already
 $results_rows = $PDOX->allRowsDie("SELECT result_id, R.link_id AS link_id, R.user_id AS user_id, M.role as role,
                 sourcedid, service_id, grade, note, R.json AS json, R.note AS note
-            FROM lti_result AS R
-            JOIN lti_link AS L ON L.link_id = R.link_id AND R.link_id = :LI
-            JOIN lti_context AS C ON L.context_id = C.context_id AND C.context_id = :CI
-            JOIN lti_membership AS M ON R.user_id = M.user_id AND C.context_id = M.context_id
+            FROM {$p}lti_result AS R
+            JOIN {$p}lti_link AS L ON L.link_id = R.link_id AND R.link_id = :LI
+            JOIN {$p}lti_context AS C ON L.context_id = C.context_id AND C.context_id = :CI
+            JOIN {$p}lti_membership AS M ON R.user_id = M.user_id AND C.context_id = M.context_id
             WHERE L.link_id = :LI AND M.role = 0 AND R.json IS NOT NULL",
             array(':LI'=>$LINK->id, ':CI'=>$CONTEXT->id));
 
