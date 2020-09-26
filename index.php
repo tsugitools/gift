@@ -1,6 +1,7 @@
 <?php
 require_once "../config.php";
 require_once "parse.php";
+require_once "util.php";
 
 use \Tsugi\Util\LTI;
 use \Tsugi\Core\Settings;
@@ -138,10 +139,12 @@ if ( count($_POST) > 0 ) {
 
 
 $menu = false;
+$files = get_quiz_files();
 if ( $USER->instructor ) {
     $menu = new \Tsugi\UI\MenuSet();
     $menu->addLeft('Student Data', 'grades.php');
     $menu->addRight('Edit Quiz', 'configure');
+    if ( $files && count($files) > 1 ) $menu->addRight('Load Quiz', 'old_configure.php');
     $menu->addRight('Export', 'export');
     if ( $CFG->launchactivity ) {
         $menu->addRight('Analytics', 'analytics');
