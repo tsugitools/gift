@@ -48,7 +48,7 @@ if (!empty($_POST)) {
 $files = get_quiz_files();
 $menu = new \Tsugi\UI\MenuSet();
 $menu->addLeft('Back', 'index.php');
-if ( $files && count($files) > 1 ) $menu->addRight('Load Quiz', 'old_configure.php');
+// if ( $files && count($files) > 1 ) $menu->addRight('Load Quiz', 'old_configure.php');
 $menu->addRight('Edit Raw GIFT', 'old_configure.php');
 
 // View
