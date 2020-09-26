@@ -42,3 +42,17 @@ function libxml_display_error($error)
     return $return; 
 } 
 
+function get_quiz_files() {
+    global $CFG;
+    if ( ! isset ($CFG->giftquizzes) || ! is_dir($CFG->giftquizzes) ) return false;
+    $files1 = scandir($CFG->giftquizzes);
+    $files = array();
+    foreach($files1 as $file) {
+        if ( is_dir($CFG->giftquizzes . '/' .$file) ) continue;
+        if ( $file == '.lock' ) continue;
+        if ( strpos($file, '.') === 0 ) continue;
+        $files[] = $file;
+    }
+    sort($files);
+    return $files;
+}

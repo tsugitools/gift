@@ -2,6 +2,7 @@
 require_once "../config.php";
 require_once "parse.php";
 require_once "sample.php";
+require_once "util.php";
 
 use \Tsugi\Core\Cache;
 use \Tsugi\Core\LTIX;
@@ -21,7 +22,7 @@ if ( isset($_POST['gift']) ) {
     // Some sanity checking...
     $retval = check_gift($gift);
     if ( ! $retval ) {
-        header( 'Location: '.addSession('configure.php') ) ;
+        header( 'Location: '.addSession('old_configure.php') ) ;
         return;
     }
 
@@ -29,29 +30,20 @@ if ( isset($_POST['gift']) ) {
     $LINK->setJson($gift);
     $_SESSION['success'] = 'Quiz updated';
     unset($_SESSION['gift']);
-    header( 'Location: '.addSession('configure.php') ) ;
+    header( 'Location: '.addSession('index.php') ) ;
     return;
 }
 
 // Check to see if we are supposed to preload a quiz
-$files = false;
 $lock = false;
-if ( isset ($CFG->giftquizzes) && is_dir($CFG->giftquizzes) ) {
-    $files1 = scandir($CFG->giftquizzes);
-    $files = array();
-    foreach($files1 as $file) {
-        if ( $file == '.lock' ) {
-            $lock = trim(file_get_contents($CFG->giftquizzes.'/'.$file));
-            continue;
-        }
-        if ( strpos($file, '.') === 0 ) continue;
-        $files[] = $file;
-    }
-    sort($files);
+$files = get_quiz_files();
+if ( $files && is_file($CFG->giftquizzes.'/.lock') ) {
+    $lock = trim(file_get_contents($CFG->giftquizzes.'/.lock'));
 }
+
 if ( $files && count($files) < 1 ) {
     $_SESSION['error'] = "Found no files in ".$CFG->giftquizzes;
-    header( 'Location: '.addSession('configure.php') ) ;
+    header( 'Location: '.addSession('old_configure.php') ) ;
     return;
 }
 // print_r($files);
@@ -64,14 +56,14 @@ if ( $files && isset($_POST['file']) ) {
     $key = isset($_POST['lock']) ? $_POST['lock'] : false;
     if ( $lock && $lock != $key ) {
         $_SESSION['error'] = 'Incorrect password';
-        header( 'Location: '.addSession('configure.php') ) ;
+        header( 'Location: '.addSession('old_configure.php') ) ;
         return;
     }
 
     $name = $_POST['file'];
     if ( ! in_array($name, $files) ) {
         $_SESSION['error'] = 'Quiz file not found: '.$_POST['file'];
-        header( 'Location: '.addSession('configure.php') ) ;
+        header( 'Location: '.addSession('old_configure.php') ) ;
         return;
     }
 
@@ -81,12 +73,12 @@ if ( $files && isset($_POST['file']) ) {
     // Also pre-check for sanity
     $retval = check_gift($gift);
     if ( ! $retval ) {
-        header( 'Location: '.addSession('configure.php') ) ;
+        header( 'Location: '.addSession('old_configure.php') ) ;
         return;
     }
 
     $_SESSION['success'] = 'Preloaded quiz content from file. Make sure to save the quiz below.';
-    header( 'Location: '.addSession('configure.php') ) ;
+    header( 'Location: '.addSession('old_configure.php') ) ;
     return;
 }
 
