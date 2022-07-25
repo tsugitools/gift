@@ -42,16 +42,23 @@ function parse_gift($text, &$questions, &$errors) {
         $answer = false;
         $escape = false;
         $found = false;
-        // echo("==================\n".$text."\n");
+        // echo("<pre>\n");echo("==================\n".$text."\n");echo("</pre>\n");
         // Parse out the overall question and answer.
         for ( $i=0; $i < strlen($text); $i++ ) {
             $ch = $text[$i];
             // Eat up the \{ and \} escapes
-            if ( $escape && ($ch == '{' || $ch == '}') ) {
-                if ( $answer !== false ) $answer .= $ch;
+            // Make \ escapable so we can put '\n' in text with '\\n'
+            $escapable = '~=#{}\\';
+            if ( $escape ) {
+                if (strpos($escapable, $ch) !== false) {
+                    if ( $answer !== false ) $answer .= $ch;
+                } else {
+                    if ( $answer !== false ) $answer .= '\\' . $ch;
+                }
                 $escape = false;
                 continue;
             }
+
             if ( $ch == '\\' && ! $escape ) {
                 $escape = true;
                 continue;
@@ -87,7 +94,6 @@ function parse_gift($text, &$questions, &$errors) {
         }
 
         $answer = trim($answer);
-        // echo("Answer=".$answer."\n");
 
         // We won't know until later if the question is short answer or not.
         if ( $epos == strlen($text)-1 ) {
