@@ -39,22 +39,13 @@ function parse_gift($text, &$questions, &$errors) {
         $text = trim($pieces[2]);
         $spos = false;
         $epos = false;
-        $answer = false;
         $escape = false;
-        $found = false;
         // echo("<pre>\n");echo("==================\n".$text."\n");echo("</pre>\n");
-        // Parse out the overall question and answer.
+        // Determine the beginning and end of the question and answer
+        // An unescaped open and close curly brace
         for ( $i=0; $i < strlen($text); $i++ ) {
             $ch = $text[$i];
-            // Eat up the \{ and \} escapes
-            // Make \ escapable so we can put '\n' in text with '\\n'
-            $escapable = '~=#{}\\';
             if ( $escape ) {
-                if (strpos($escapable, $ch) !== false) {
-                    if ( $answer !== false ) $answer .= $ch;
-                } else {
-                    if ( $answer !== false ) $answer .= '\\' . $ch;
-                }
                 $escape = false;
                 continue;
             }
@@ -64,50 +55,25 @@ function parse_gift($text, &$questions, &$errors) {
                 continue;
             }
 
-            if ( $answer === false ) {
-                if ( $ch != '{' ) continue;
-                $answer = "";
+            if ( $ch == '{' && $spos === false ) {
                 $spos = $i;
-                continue;
             }
-            if ( $ch == '}' ) {
+
+            if ( $ch == '}' && $epos === false  && $spos !== false ) {
                 $epos = $i;
-                $found = true;
-                break;
-            }
-            if ( $escape ) {
-                $answer .= '\\';
-                $answer .= $ch;
-                $escape = false;
-            } else {
-                if ( $ch == '\\' ) {
-                    $escape = true;
-                    continue;
-                }
-                $answer .= $ch;
             }
         }
 
-        if ( $found === false ) {
-            $errors[] = "Could not find answer: ".$raw;
+        if ( $spos === false || $epos === false || $spos >= $epos) {
+            $errors[] = "Could not find answer spos=$spos epos=$epos\n".$raw;
             continue;
         }
 
-        $answer = trim($answer);
+        $question = trim(substr($text,0,$spos-1));
+        $sa_question = trim(substr($text,0,$spos-1)) . " [_____] " . trim(substr($text,$epos+1));
+        $answer = trim(substr($text, $spos+1, $epos-$spos-1));
 
-        // We won't know until later if the question is short answer or not.
-        if ( $epos == strlen($text)-1 ) {
-            $question = trim(substr($text,0,$spos-1));
-            $sa_question = $question;   // No blank at the end of the question
-        } else {
-            $question = trim(substr($text,0,$spos-1)) . " " . trim(substr($text,$epos+1));
-            $sa_question = trim(substr($text,0,$spos-1)) . " [_____] " . trim(substr($text,$epos+1));
-        }
-
-        // Fix the remaining escapes in the question
-        $question = str_replace(array('\\{','\\}'), array('{', '}'),$question);
-
-        // echo("Question=".$question."\n");
+        /// echo("<pre>\n");echo("spos $spos epos $epos\n");echo("== Q ==\n".$question."\n");echo("== A ==\n".$answer."====\n");echo("</pre>\n");
 
         if ( strpos($answer, "->" ) > 0 ) {
             $type = 'matching_question'; // CHECK THIS
@@ -127,6 +93,7 @@ function parse_gift($text, &$questions, &$errors) {
             $errors[] = "Could not determine question type: ".$raw;
             continue;
         }
+
         $quesno = $quesno + 1;
         $ansno = 0;
         $answers = array();
@@ -141,25 +108,15 @@ function parse_gift($text, &$questions, &$errors) {
             $feedback = false;
             $in_feedback = false;
 
+            // Over scan by 1 so we can handle the last entry inside the loop
+            // with a middle exit
             for($i=0;$i<strlen($answer)+1; $i++ ) {
+                $prevch = $i > 0 ? $answer[$i-1] : ' ';
                 $ch = $i < strlen($answer) ? $answer[$i] : -1;
-                // Handle escape sequences
-                if ( $ch == '\\' && $i < strlen($answer)-1) {
-                    $nextch = $answer[$i+1];
-                    if ( strpos("~=#{}:->%",$nextch) !== false ) {
-                        if ( $in_feedback ) {
-                            $feedback .= $nextch;
-                        } else {
-                            $answer_text .= $nextch;
-                        }
-                        $i = $i + 1;  // Advance past the nextch
-                        continue;
-                    }
-                }
 
-                // echo $i," ", $ch, "\n";
+                // echo("<pre>\n$i $ch\n</pre>\n");
                 // Finish up the previous entry
-                if ( ( $ch == -1 || $ch == '=' || $ch == "~" ) && strlen($answer_text) > 0 ) {
+                if ( strlen($answer_text) > 0 && ($ch == -1 || ($prevch != "\\" && ($ch == '=' || $ch == "~" )) ) && strlen($answer_text) > 0 ) {
                     if ( $correct === null || $answer_text === false ) {
                         $errors[] = "Mal-formed answer sequence: ".$raw;
                         $parsed_answer = array();
@@ -171,7 +128,17 @@ function parse_gift($text, &$questions, &$errors) {
                         $incorrect_answers++;
                     }
                     $ansno = $ansno + 1;
+                    // echo("<pre>BEFORE\n".($correct? "C" : "X")." $answer_text -- $feedback\n</pre>\n");
+
+                    // Escape the answer text - This will go through htmlentities
+                    // Note - \n is only in question text, not answers
+                    $answer_text = str_replace("\\\\","&#92;", $answer_text);
+                    $answer_text = str_replace("\\","", $answer_text);
+                    $answer_text = str_replace("&#92;", "\\", $answer_text);
                     $code = substr($quesno.':'.$ansno.':'.md5(trim($answer_text)),0,10);
+
+                    // echo("<pre>\n".($correct? "C" : "X")." $code $answer_text -- $feedback\n</pre>\n");
+
                     $parsed_answer[] = array($correct, trim($answer_text), trim($feedback), $code);
                     // Set up for the next one
                     $correct = null;
@@ -184,17 +151,17 @@ function parse_gift($text, &$questions, &$errors) {
                 if ( $ch == -1 ) break;
 
                 // right or wrong?
-                if ( $ch == '=' ) {
+                if ( $prevch != "\\" && $ch == '=' ) {
                     $correct = true;
                     continue;
                 }
-                if ( $ch == '~' ) {
+                if ( $prevch != "\\" && $ch == '~' ) {
                     $correct = false;
                     continue;
                 }
 
                 // right or wrong?
-                if ( $ch == '#' && $in_feedback === false ) {
+                if ( $prevch != "\\" && $ch == '#' && $in_feedback === false ) {
                     $in_feedback = true;
                     continue;
                 }
@@ -225,6 +192,8 @@ function parse_gift($text, &$questions, &$errors) {
                 continue;
             }
         }
+
+        // var_dump_pre($parsed_answer, true);
         // echo "\nN: ",$name,"\nQ: ",$question,"\nA: ",$answer,"\nType:",$type,"\n";
         $qobj = new stdClass();
         $qobj->name = $name;
@@ -233,6 +202,9 @@ function parse_gift($text, &$questions, &$errors) {
             $qobj->html = true;
         } else {
             $question = htmlentities($question);
+            $question = str_replace("\\\\","&#92;", $question);
+            $question = str_replace("\\n","<br>", $question);
+            $question = str_replace("\\","", $question);
         }
         $qobj->question = $question;
         $qobj->code = $quesno.':'.substr(md5($question),0,9);
@@ -243,8 +215,7 @@ function parse_gift($text, &$questions, &$errors) {
         $questions[] = $qobj;
     }
 
-    // var_dump_pre($questions);
-
+    // var_dump_pre($questions, true);
 }
 
 

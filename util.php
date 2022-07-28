@@ -15,7 +15,11 @@ function var_dump_pre($variable, $print=true) {
     ob_start();
     var_dump($variable);
     $result = ob_get_clean();
-    if ( $print ) print htmlent_utf8($result);
+    if ( $print ) {
+        echo("<pre>\n");
+        echo(htmlent_utf8($result));
+        echo("</pre>\n");
+    }
     return $result;
 }
 
