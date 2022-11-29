@@ -198,13 +198,13 @@ function parse_gift($text, &$questions, &$errors) {
         $qobj = new stdClass();
         $qobj->name = $name;
         if ( strpos($question,'[html]') === 0 ) {
-            $question = ltrim(substr($question,6));
+            $question = de_escape(ltrim(substr($question,6)));
             $qobj->html = true;
         } else {
             $question = htmlentities($question);
             $question = str_replace("\\\\","&#92;", $question);
             $question = str_replace("\\n","<br>", $question);
-            $question = str_replace("\\","", $question);
+            $question = de_escape($question);
         }
         $qobj->question = $question;
         $qobj->code = $quesno.':'.substr(md5($question),0,9);
@@ -425,5 +425,17 @@ function check_gift($gift) {
         return false;
     }
     return true;
+}
+
+function de_escape($str) {
+    $retval = "";
+    for ($i = 0; $i < strlen($str); $i++){
+        $ch = $str[$i];
+        if ( $ch == '\\' && $i < strlen($str)-1) {
+            $ch = $str[++$i];
+        }
+        $retval .= $ch;
+    }
+    return $retval;
 }
 
