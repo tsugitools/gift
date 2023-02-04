@@ -237,6 +237,7 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
     $count = 1;
     $cumulative_score = 0;
     $cumulative_total = 0;
+    $mt = new Mersenne_Twister($seed);
     // Filter out questions for the user-visible stuff
     foreach($questions as $question) {
         $nq = new stdClass();
@@ -326,7 +327,6 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                 }
                 $answers[] = $ans;
             }
-            $mt = new Mersenne_Twister($seed);
             // $answers = $mt->shuffle($answers);
             $nq->answers = $mt->shuffle($answers);
         } 
@@ -374,7 +374,6 @@ function make_quiz($submit, $questions, $errors, $seed=-1) {
                     $score = 0;
                 }
             }
-            $mt = new Mersenne_Twister($seed);
             $nq->answers = $mt->shuffle($answers);
         }
 
