@@ -94,5 +94,6 @@ function create_gift_format($question) {
     $question['text'] = '[html]'.$question['text'];
   }
   // create the formatted string and return it
-  return "::{$question['title']}:: {$question['text']} {{$answers}}";
+  $title = $question['title'] ?? ' ';
+  return "::{$title}:: {$question['text']} {{$answers}}";
 }
