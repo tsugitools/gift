@@ -1,5 +1,7 @@
 <?php
 
+require_once "strlen.php";
+
 date_default_timezone_set('UTC');
 
 $text = 
@@ -41,13 +43,13 @@ foreach ( $lines as $line ) {
     $line = rtrim($line);
     if ( strpos($line, "//") === 0 ) continue;
     if ($line == "" ) {
-        if ( strlen($question) > 0 ) {
+        if ( U__strlen($question) > 0 ) {
             $raw_questions[] = $question;
             $question = "";
         }
         continue;
     }
-    if ( strlen($question) > 0 ) $question .= " ";
+    if ( U__strlen($question) > 0 ) $question .= " ";
     $question .= trim($line);
 }
 
@@ -84,7 +86,7 @@ foreach ( $raw_questions as $raw ) {
         // We are good...
     } else if ( strpos($answer,"T") === 0 || strpos($answer, "F") === 0 ) {
         $type = 'true_false_question';
-    } else if ( strlen($answer) < 1 ) {
+    } else if ( U__strlen($answer) < 1 ) {
         $type = 'essay_question';
     } else if ( strpos($answer, '#') === 0 ) {
         $type = 'numerical_question';

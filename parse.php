@@ -2,6 +2,8 @@
 
 use \Tsugi\Util\Mersenne_Twister;
 
+require_once "strlen.php";
+
 function parse_gift($text, &$questions, &$errors) {
     $raw_questions = array();
     $question = "";
@@ -11,17 +13,17 @@ function parse_gift($text, &$questions, &$errors) {
         // print $line."\n";
         if ( strpos($line, "//") === 0 ) continue;
         if ($line == "" ) {
-            if ( strlen($question) > 0 ) {
+            if ( U__strlen($question) > 0 ) {
                 $raw_questions[] = $question;
                 $question = "";
             }
             continue;
         }
-        if ( strlen($question) > 0 ) $question .= "\n";
+        if ( U__strlen($question) > 0 ) $question .= "\n";
         $question .= $line;
     }
 
-    if ( strlen($question) > 0 ) {
+    if ( U__strlen($question) > 0 ) {
         $raw_questions[] = $question;
     }
 
@@ -81,7 +83,7 @@ function parse_gift($text, &$questions, &$errors) {
             continue;
         } else if ( strpos($answer,"T") === 0 || strpos($answer, "F") === 0 ) {
             $type = 'true_false_question';
-        } else if ( strlen($answer) < 1 ) {
+        } else if ( U__strlen($answer) < 1 ) {
             $type = 'essay_question';
         } else if ( strpos($answer, '#') === 0 ) {
             $type = 'numerical_question';
@@ -116,7 +118,7 @@ function parse_gift($text, &$questions, &$errors) {
 
                 // echo("<pre>\n$i $ch\n</pre>\n");
                 // Finish up the previous entry
-                if ( strlen($answer_text) > 0 && ($ch == -1 || ($prevch != "\\" && ($ch == '=' || $ch == "~" )) ) && strlen($answer_text) > 0 ) {
+                if ( U__strlen($answer_text) > 0 && ($ch == -1 || ($prevch != "\\" && ($ch == '=' || $ch == "~" )) ) && U__strlen($answer_text) > 0 ) {
                     if ( $correct === null || $answer_text === false ) {
                         $errors[] = "Mal-formed answer sequence: ".$raw;
                         $parsed_answer = array();
