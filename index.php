@@ -143,13 +143,30 @@ $files = get_quiz_files();
 if ( $USER->instructor ) {
     $menu = new \Tsugi\UI\MenuSet();
     $menu->addLeft('Student Data', 'grades.php');
+    /*
     $menu->addRight('Edit Quiz', 'configure');
     if ( $files && count($files) > 1 ) $menu->addRight('Load Quiz', 'old_configure.php');
     $menu->addRight('Export', 'export');
     if ( $CFG->launchactivity ) {
         $menu->addRight('Analytics', 'analytics');
     }
-    $menu->addRight('Settings', '#', /* push */ false, SettingsForm::attr());
+    $menu->addRight('Settings', '#', push false, SettingsForm::attr());
+    */
+
+
+    $submenu = new \Tsugi\UI\Menu();
+    $submenu->addLink('Settings', '#', /* push */ false, SettingsForm::attr());
+    if ( $files && count($files) > 1 ) $submenu->addLink('Load Quiz', 'old_configure.php');
+    $submenu->addLink('Edit Quiz', 'configure');
+    $submenu->addLink('Export', 'export');
+    $submenu->addLink('Send Grade', 'sendgrade.php');
+
+    if ( $CFG->launchactivity ) {
+        $submenu->addLink('Analytics', 'analytics');
+    }
+    $menu->addRight('Instructor', $submenu);
+
+
 }
 
 // View
