@@ -189,6 +189,10 @@ SettingsForm::end();
 
 $OUTPUT->flashMessages();
 
+if ( $dueDate->message ) {
+    echo('<p style="color:red;">'.$dueDate->message.'</p>'."\n");
+}
+
 // Clean up the JSON for presentation
 if ( $gift === false || strlen($gift) < 1 ) {
     echo('<p class="alert-warning" style="clear:both;">This quiz has not yet been configured</p>'."\n");
