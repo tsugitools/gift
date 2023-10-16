@@ -3,6 +3,7 @@ require_once "../config.php";
 require_once "parse.php";
 require_once "util.php";
 
+use \Tsugi\Util\U;
 use \Tsugi\Util\LTI;
 use \Tsugi\Core\Settings;
 use \Tsugi\Core\LTIX;
@@ -38,7 +39,7 @@ if ( isset($_GET['quiz']) && $USER->instructor ) {
 }
 
 // Load the settings from defaults on first launch
-$LAUNCH->link->settingsDefaultsFromCustom(array('tries', 'delay'));
+$LAUNCH->link->settingsDefaultsFromCustom(array('tries', 'delay', 'instructions'));
 
 // Get the settings
 $max_str = Settings::linkGet('tries');
@@ -159,22 +160,25 @@ if ( $USER->instructor ) {
     if ( $files && count($files) > 1 ) $submenu->addLink('Load Quiz', 'old_configure.php');
     $submenu->addLink('Edit Quiz', 'configure');
     $submenu->addLink('Export', 'export');
+    $submenu->addLink('Print', 'index?print=yes', /* push */ false, 'target="_blank"');
     $submenu->addLink('Send Grade', 'sendgrade.php');
 
     if ( $CFG->launchactivity ) {
         $submenu->addLink('Analytics', 'analytics');
     }
     $menu->addRight('Instructor', $submenu);
-
-
 }
 
 // View
 $OUTPUT->header();
 ?>
 <link rel="stylesheet" type="text/css" href="css/feedback.css">
+<link rel="stylesheet" media="screen" href="main.css" />
+<link rel="stylesheet" media="print" href="print.css" />
 <?php
+$do_print = U::get($_GET, 'print', 'no') == 'yes';
 $OUTPUT->bodyStart();
+if ( ! $do_print ) {
 $OUTPUT->topNav($menu);
 $OUTPUT->welcomeUserCourse();
 
@@ -183,6 +187,7 @@ $OUTPUT->welcomeUserCourse();
 SettingsForm::start();
 SettingsForm::text('tries',__('The number of tries allowed for this quiz.  Leave blank or set to 1 for a single try.'));
 SettingsForm::text('delay',__('The number of seconds between retries.  Leave blank or set to zero to allow immediate retries.'));
+SettingsForm::textarea('instructions',__('Add any instructions for this quiz.'));
 SettingsForm::dueDate();
 SettingsForm::end();
 
@@ -212,6 +217,21 @@ if ( ! $ok ) {
     }
 }
 
+}
+
+if ( $do_print ) {
+?>
+<p>
+Name:  ___________________________________________________________
+</p>
+<?php
+}
+
+$instructions = Settings::linkGet('instructions');
+if ( is_string($instructions) && strlen($instructions) > 0 ) {
+    echo("<p>\n$instructions\n</p>\n");
+}
+
 // parse the GIFT questions
 $questions = array();
 $errors = array();
@@ -222,7 +242,7 @@ parse_gift($gift, $questions, $errors);
 <ol id="quiz">
 </ol>
 <?php
-if ( $ok || $USER->instructor ) {
+if ( ! $do_print && ( $ok || $USER->instructor ) ) {
     echo('<input type="submit">'."\n");
 }
 ?>
@@ -237,7 +257,7 @@ var_dump($attempt);
 var_dump($errors);
 echo(htmlent_utf8(LTI::jsonIndent($qj)));
 echo("</pre>\n");
-*/
+ */
 
 $OUTPUT->footerStart();
 

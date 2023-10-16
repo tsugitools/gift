@@ -10,6 +10,18 @@
     <p><input type="text" name="{{code}}" value="{{value}}" size="80"/></p>
   </li>
 </script>
+<script id="essay_question" type="text/x-handlebars-template">
+  <li>
+    <p>
+    {{#if scored}}{{#if correct}}
+        <i class="fa fa-check text-success"></i>
+    {{else}}
+        <i class="fa fa-times text-danger"></i>
+    {{/if}} {{/if}}
+    {{{question}}}</p>
+    <p><textarea name="{{code}}" value="{{value}}" style="width:100%;"></textarea></p>
+  </li>
+</script>
 <script id="multiple_answers_question" type="text/x-handlebars-template">
   <li>
     <p>
