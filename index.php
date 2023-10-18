@@ -39,7 +39,7 @@ if ( isset($_GET['quiz']) && $USER->instructor ) {
 }
 
 // Load the settings from defaults on first launch
-$LAUNCH->link->settingsDefaultsFromCustom(array('tries', 'delay', 'instructions'));
+$LAUNCH->link->settingsDefaultsFromCustom(array('tries', 'delay', 'title', 'instructions'));
 
 // Get the settings
 $max_str = Settings::linkGet('tries');
@@ -187,6 +187,7 @@ $OUTPUT->welcomeUserCourse();
 SettingsForm::start();
 SettingsForm::text('tries',__('The number of tries allowed for this quiz.  Leave blank or set to 1 for a single try.'));
 SettingsForm::text('delay',__('The number of seconds between retries.  Leave blank or set to zero to allow immediate retries.'));
+SettingsForm::text('title',__('Add a title for this quiz.'));
 SettingsForm::textarea('instructions',__('Add any instructions for this quiz.'));
 SettingsForm::dueDate();
 SettingsForm::end();
@@ -217,6 +218,12 @@ if ( ! $ok ) {
     }
 }
 
+}
+
+$title = Settings::linkGet('title');
+if ( is_string($title) && strlen($title) > 0 ) {
+    echo("<center>\n$title\n</center>\n");
+    echo("&nbsp;<br/>\n");
 }
 
 if ( $do_print ) {
