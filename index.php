@@ -41,6 +41,13 @@ if ( isset($_GET['quiz']) && $USER->instructor ) {
 // Load the settings from defaults on first launch
 $LAUNCH->link->settingsDefaultsFromCustom(array('tries', 'delay', 'title', 'instructions'));
 
+$password = Settings::linkGet('password');
+if ( strlen(U::get($_POST, "password", '')) > 0  ) {
+    $_SESSION['assignment_password'] = U::get($_POST, "password");
+    header( 'Location: '.addSession('index.php') ) ;
+    return;
+}
+
 // Get the settings
 $max_str = Settings::linkGet('tries');
 $max_tries = 0;
@@ -49,6 +56,8 @@ if ( $max_tries < 1 ) $max_tries = 1;
 $delay_str = Settings::linkGet('delay');
 $delay = 0;
 if ( is_numeric($delay_str) ) $delay = $delay_str+0;
+
+$password_ok = strlen($password) < 1 || U::get($_SESSION,'assignment_password') == $password;
 
 // Get any due date information
 $dueDate = SettingsForm::getDueDate();
@@ -185,6 +194,7 @@ $OUTPUT->welcomeUserCourse();
 // Settings button and dialog
 
 SettingsForm::start();
+SettingsForm::text('password',__('Set a password to protect this assignment'));
 SettingsForm::text('tries',__('The number of tries allowed for this quiz.  Leave blank or set to 1 for a single try.'));
 SettingsForm::text('delay',__('The number of seconds between retries.  Leave blank or set to zero to allow immediate retries.'));
 SettingsForm::text('title',__('Add a title for this quiz.'));
@@ -197,6 +207,23 @@ $OUTPUT->flashMessages();
 
 if ( $dueDate->message ) {
     echo('<p style="color:red;">'.$dueDate->message.'</p>'."\n");
+}
+
+if ( ! $password_ok ) {
+?>
+<p>
+This quiz is password protected, please enter the instructor provided password to
+unlock this assignment.
+</p>
+<p>
+<form method="post">
+    Password:
+    <input type="password" name="password">
+    <input type="submit">
+</form>
+<?php
+    $OUTPUT->footer();
+    return;
 }
 
 // Clean up the JSON for presentation
