@@ -149,6 +149,7 @@ foreach($questions as $question) {
         $response_lid = $presentation->addChild('response_lid');
         $response_lid->addAttribute("ident", "response1");
         $render_choice = $response_lid->addChild('render_choice');
+        $render_choice->addAttribute("shuffle", "Yes");
 
         $correct = array();;
         $incorrect = array();;

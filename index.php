@@ -168,7 +168,7 @@ if ( $USER->instructor ) {
     $submenu->addLink('Settings', '#', /* push */ false, SettingsForm::attr());
     if ( $files && count($files) > 1 ) $submenu->addLink('Load Quiz', 'old_configure.php');
     $submenu->addLink('Edit Quiz', 'configure');
-    $submenu->addLink('Export', 'export');
+    $submenu->addLink('Export QTI', 'export.php');
     $submenu->addLink('Print', 'index?print=yes', /* push */ false, 'target="_blank"');
     $submenu->addLink('Send Grade', 'sendgrade.php');
 
