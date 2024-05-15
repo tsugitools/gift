@@ -2,10 +2,9 @@
 require_once "../config.php";
 require_once "parse.php";
 
-require_once "strlen.php";
-
 header("Content-type: application/json; charset=utf-8");
 
+use \Tsugi\Util\U;
 use \Tsugi\Core\LTIX;
 
 $LTI = LTIX::session_start();
@@ -15,7 +14,7 @@ $gift = $LINK->getJson();
 
 $questions = false;
 $errors = array("No questions found");
-if ( U__strlen($gift) > 0 ) {
+if ( U::strlen($gift) > 0 ) {
     $questions = array();
     $errors = array();
     parse_gift($gift, $questions, $errors);

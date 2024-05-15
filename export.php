@@ -3,6 +3,7 @@
 require_once "../config.php";
 require_once "parse.php";
 
+use \Tsugi\Util\U;
 use \Tsugi\Util\LTI;
 use \Tsugi\Core\Settings;
 use \Tsugi\Core\LTIX;

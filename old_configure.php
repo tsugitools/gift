@@ -4,6 +4,7 @@ require_once "parse.php";
 require_once "sample.php";
 require_once "util.php";
 
+use \Tsugi\Util\U;
 use \Tsugi\Core\Cache;
 use \Tsugi\Core\LTIX;
 

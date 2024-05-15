@@ -1,6 +1,11 @@
 <?php
 
+
+require_once("../config.php");
+
 require_once("parse.php");
+
+use \Tsugi\Util\U;
 
 echo("<pre>\n");
 

@@ -2,6 +2,8 @@
 
 // Note that somehow including config.php here blows up the XML validation...
 
+require_once "../config.php";
+
 require_once "util.php";
 
 session_start();
