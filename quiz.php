@@ -2,7 +2,6 @@
 require_once "../config.php";
 require_once "parse.php";
 
-use \Tsugi\Util\U;
 use \Tsugi\Core\LTIX;
 use \Tsugi\UI\Output;
 
@@ -12,7 +11,7 @@ $gift = $LINK->getJson();
 Output::headerJson();
 
 // Check if we got any GIFT
-if ( $gift === false || U::strlen($gift) < 1 ) {
+if ( $gift === false || !is_string($gift) || strlen($gift) < 1 ) {
     echo ( json_encode(array("status" => "failure", "message" => "This quiz has not yet been configured")));
     return;
 }
