@@ -74,6 +74,7 @@ if ( strlen($gift) > 0 ) {
     parse_gift($gift, $questions, $errors);
 }
 
+// TODO: Remove this sometime after 2024-09-17
 // Load the previous attempt
 $attempt = json_decode($RESULT->getJson());
 $when = 0;
@@ -81,6 +82,15 @@ $tries = 0;
 if ( $attempt && is_object($attempt) ) {
     if ( isset($attempt->when) ) $when = $attempt->when + 0;
     if ( isset($attempt->tries) ) $tries = $attempt->tries + 0;
+}
+
+// TODO: Trust this sometime after 2024-09-17
+if ( $tries == 0 && method_exists($RESULT, 'getAttempts') ) {
+    $attempts = $RESULT->getAttempts();
+    if ( is_object($attempts) ) {
+        $when = $attempts->attempted_at ?? $when;
+        $tries = $attempts->attempts ?? $tries;
+    }
 }
 
 // Decide if it is OK to submit this quiz
@@ -112,6 +122,9 @@ if ( count($_POST) > 0 ) {
 
     $result = array("when" => time(), "tries" => $tries+1, "submit" => $_POST);
     $RESULT->setJson(json_encode($result));
+    
+    // TODO: Remove this test a while after 2024-09-17
+    if ( method_exists($RESULT, 'recordAttempt') ) $RESULT->recordAttempt();
 
     $_SESSION['gift_submit'] = $_POST;
     $quiz = make_quiz($_POST, $questions, $errors);
