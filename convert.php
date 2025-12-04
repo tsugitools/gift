@@ -128,7 +128,7 @@ onclick="$('#myModal').modal('show');"></p>
 <p>Quiz Title: <input type="text" name="title" size="60" value="Converted using GIFT2QTI"/></p>
 <p>Quiz File Name (no suffix): <input type="text" name="name" size="30"/> (optional)</p>
 <textarea rows="30" style="width: 98%" name="text">
-<?= htmlent_utf8($text); ?>
+<?= htmlentities($text); ?>
 </textarea>
 <p><input type="checkbox" name="bypass" value="bypass">
 Do not validate the XML</p>

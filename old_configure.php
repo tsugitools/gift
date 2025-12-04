@@ -142,7 +142,7 @@ The documentation for the GIFT format comes from
 <input type="submit" class="btn btn-primary" value="Save">
 </p>
 <textarea name="gift" rows="25" cols="80" style="width:95%" >
-<?php echo(htmlent_utf8($gift)); ?>
+<?php echo(htmlentities($gift)); ?>
 </textarea>
 <p>
 </form>

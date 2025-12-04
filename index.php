@@ -302,7 +302,7 @@ $qj = json_encode($questions);
 echo("<pre>\n");
 var_dump($attempt);
 var_dump($errors);
-echo(htmlent_utf8(LTI::jsonIndent($qj)));
+echo(htmlentities(LTI::jsonIndent($qj)));
 echo("</pre>\n");
  */
 
