@@ -1,8 +1,7 @@
 ::AS_Q1::
 In Python, what is a variable really?
 {
-=A reference to an object
-~A container holding a value
+=Correct Answer~A container holding a value
 ~A fixed memory location
 ~A data structure
 }
@@ -10,8 +9,7 @@ In Python, what is a variable really?
 ::AS_Q2::
 What happens when you execute x = 42?
 {
-=The name x is bound to an integer object
-~The value 42 is copied into x
+=Correct Answer~The value 42 is copied into x
 ~Memory inside x is modified
 ~x becomes immutable
 }
@@ -19,8 +17,7 @@ What happens when you execute x = 42?
 ::AS_Q3::
 After x = 42 and y = x, which is true?
 {
-=x and y reference the same object
-~y gets a copy of x
+=Correct Answer~y gets a copy of x
 ~x is deleted
 ~A new integer object is created
 }
@@ -28,8 +25,7 @@ After x = 42 and y = x, which is true?
 ::AS_Q4::
 Which function helps determine whether two names refer to the same object?
 {
-=id()
-~type()
+=Correct Answer~type()
 ~dir()
 ~len()
 }
@@ -37,8 +33,7 @@ Which function helps determine whether two names refer to the same object?
 ::AS_Q5::
 Why is the “variable as a box” metaphor misleading?
 {
-=Variables do not contain objects, they reference them
-~Variables cannot change
+=Correct Answer~Variables cannot change
 ~Objects cannot be shared
 ~Memory is hidden
 }
@@ -46,8 +41,7 @@ Why is the “variable as a box” metaphor misleading?
 ::AS_Q6::
 Which of the following is an immutable type?
 {
-=Integer
-~List
+=Correct Answer~List
 ~Dictionary
 ~Set
 }
@@ -55,8 +49,7 @@ Which of the following is an immutable type?
 ::AS_Q7::
 Why does x = x + 1 create a new integer object?
 {
-=Integers are immutable
-~x is read-only
+=Correct Answer~x is read-only
 ~Python copies eagerly
 ~Garbage collection runs
 }
@@ -64,8 +57,7 @@ Why does x = x + 1 create a new integer object?
 ::AS_Q8::
 What happens when you assign y = x where x is a list?
 {
-=y references the same list object
-~The list is copied
+=Correct Answer~The list is copied
 ~The list becomes immutable
 ~A new list is created
 }
@@ -73,8 +65,7 @@ What happens when you assign y = x where x is a list?
 ::AS_Q9::
 Why can modifying x also change y in this case?
 {
-=Both names point to the same object
-~Lists are global
+=Correct Answer~Lists are global
 ~Assignment copies values
 ~Python passes lists by value
 }
@@ -82,17 +73,12 @@ Why can modifying x also change y in this case?
 ::AS_Q10::
 Which creates a shallow copy of a list?
 {
-=y = list(x)
-~y = x
-~y = new x
-~y = copy
-}
+=Correct Answer~y =Correct Answer~y =Correct Answer~y =Correct Answer}
 
 ::AS_Q11::
 What does assignment NEVER do in Python?
 {
-=Copy an object automatically
-~Bind a name
+=Correct Answer~Bind a name
 ~Rebind a name
 ~Change what a name refers to
 }
@@ -100,8 +86,7 @@ What does assignment NEVER do in Python?
 ::AS_Q12::
 Why is shared mutable state dangerous?
 {
-=Changes can affect multiple references unexpectedly
-~It slows execution
+=Correct Answer~It slows execution
 ~It breaks templates
 ~It confuses the garbage collector
 }
@@ -109,8 +94,7 @@ Why is shared mutable state dangerous?
 ::AS_Q13::
 How does this relate to Django views?
 {
-=Shared mutable class attributes can leak data
-~Views copy objects per request
+=Correct Answer~Views copy objects per request
 ~Templates isolate state
 ~Sessions fix assignment
 }
@@ -118,8 +102,7 @@ How does this relate to Django views?
 ::AS_Q14::
 Why are instance attributes safer than class attributes?
 {
-=Each instance gets its own storage
-~They are immutable
+=Correct Answer~They are immutable
 ~They are faster
 ~They persist across requests
 }
@@ -127,8 +110,7 @@ Why are instance attributes safer than class attributes?
 ::AS_Q15::
 Which assignment creates a new binding?
 {
-=x = []
-~x.append(1)
+=Correct Answer~x.append(1)
 ~x.sort()
 ~x.pop()
 }
@@ -136,17 +118,12 @@ Which assignment creates a new binding?
 ::AS_Q16::
 Which operation mutates an existing object?
 {
-=x.append(1)
-~x = x + [1]
-~x = list(x)
-~x = new x
-}
+=Correct Answer~x =Correct Answer~x =Correct Answer~x =Correct Answer}
 
 ::AS_Q17::
 Why does Django avoid storing request-specific data on the class?
 {
-=Class attributes are shared across instances
-~Classes cannot store data
+=Correct Answer~Classes cannot store data
 ~Templates reset state
 ~Sessions overwrite values
 }
@@ -154,8 +131,7 @@ Why does Django avoid storing request-specific data on the class?
 ::AS_Q18::
 Which Python concept explains why per-request state works?
 {
-=Each request creates a new object instance
-~Variables are cleared automatically
+=Correct Answer~Variables are cleared automatically
 ~Garbage collection runs immediately
 ~Templates isolate data
 }
@@ -163,8 +139,7 @@ Which Python concept explains why per-request state works?
 ::AS_Q19::
 How does understanding assignment help debugging?
 {
-=It clarifies when data is shared versus copied
-~It explains routing errors
+=Correct Answer~It explains routing errors
 ~It improves CSS layout
 ~It fixes authentication
 }
@@ -172,8 +147,7 @@ How does understanding assignment help debugging?
 ::AS_Q20::
 Which statement best summarizes Python assignment?
 {
-=Assignment binds names to objects; it does not copy objects
-~Assignment copies values into variables
+=Correct Answer~Assignment copies values into variables
 ~Assignment allocates memory per variable
 ~Assignment isolates state automatically
 }

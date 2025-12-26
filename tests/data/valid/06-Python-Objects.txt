@@ -1,8 +1,7 @@
 ::OO_Q1::
 In Python, what must exist before you can create an object?
 {
-=A class
-~A method
+=Correct Answer~A method
 ~An attribute
 ~A variable
 }
@@ -10,8 +9,7 @@ In Python, what must exist before you can create an object?
 ::OO_Q2::
 What best describes a Python class?
 {
-=A blueprint for creating objects
-~A container for data
+=Correct Answer~A container for data
 ~A function with state
 ~A memory location
 }
@@ -19,8 +17,7 @@ What best describes a Python class?
 ::OO_Q3::
 In Django, what is a class-based view?
 {
-=A class defining behavior for view instances
-~A function that renders HTML
+=Correct Answer~A function that renders HTML
 ~A database record
 ~A template controller
 }
@@ -28,8 +25,7 @@ In Django, what is a class-based view?
 ::OO_Q4::
 When Django processes a request using a class-based view, it:
 {
-=Creates a new instance of the view class
-~Uses the same instance for all users
+=Correct Answer~Uses the same instance for all users
 ~Calls the class directly
 ~Reuses a cached object
 }
@@ -37,8 +33,7 @@ When Django processes a request using a class-based view, it:
 ::OO_Q5::
 Which term best describes an object created from a class?
 {
-=Instance
-~Attribute
+=Correct Answer~Attribute
 ~Method
 ~Template
 }
@@ -46,8 +41,7 @@ Which term best describes an object created from a class?
 ::OO_Q6::
 In Python, what is an attribute?
 {
-=A variable stored inside an object
-~A global variable
+=Correct Answer~A global variable
 ~A function parameter
 ~A template value
 }
@@ -55,8 +49,7 @@ In Python, what is an attribute?
 ::OO_Q7::
 Which of the following are typically attributes of a Django view class?
 {
-=model and template_name
-~request and response
+=Correct Answer~request and response
 ~session and cookies
 ~URL patterns
 }
@@ -64,8 +57,7 @@ Which of the following are typically attributes of a Django view class?
 ::OO_Q8::
 What is the purpose of the __init__ method?
 {
-=Initialize a new instance
-~Destroy an instance
+=Correct Answer~Destroy an instance
 ~Handle an HTTP request
 ~Render a template
 }
@@ -73,8 +65,7 @@ What is the purpose of the __init__ method?
 ::OO_Q9::
 Which OO concept allows Django to reuse and extend view behavior?
 {
-=Inheritance
-~Encapsulation
+=Correct Answer~Encapsulation
 ~Polymorphism
 ~Destruction
 }
@@ -82,8 +73,7 @@ Which OO concept allows Django to reuse and extend view behavior?
 ::OO_Q10::
 Which syntax correctly defines inheritance in Python?
 {
-=class Child inherits from Parent using parentheses
-~class Child inherits Parent using a keyword
+=Correct Answer~class Child inherits Parent using a keyword
 ~class Child extends Parent using extends
 ~class Child from Parent using from
 }
@@ -92,8 +82,7 @@ Which syntax correctly defines inheritance in Python?
 ::OO_Q11::
 In Django generic views, what does overriding a method do?
 {
-=Replaces inherited behavior with custom logic
-~Changes the parent class
+=Correct Answer~Changes the parent class
 ~Creates a new object type
 ~Disables inheritance
 }
@@ -101,8 +90,7 @@ In Django generic views, what does overriding a method do?
 ::OO_Q12::
 What does self represent inside a method?
 {
-=The instance on which the method is called
-~The class definition
+=Correct Answer~The class definition
 ~The request object
 ~The URL resolver
 }
@@ -110,8 +98,7 @@ What does self represent inside a method?
 ::OO_Q13::
 Why does Django create a new view instance per request?
 {
-=To avoid shared state between users
-~To improve database speed
+=Correct Answer~To improve database speed
 ~To simplify templates
 ~To reuse class attributes
 }
@@ -119,8 +106,7 @@ Why does Django create a new view instance per request?
 ::OO_Q14::
 What does calling super() typically do?
 {
-=Invokes behavior from the parent class
-~Skips the current method
+=Correct Answer~Skips the current method
 ~Stops request processing
 ~Creates a new instance
 }
@@ -128,8 +114,7 @@ What does calling super() typically do?
 ::OO_Q15::
 Which OO concept best explains Django mixins?
 {
-=Multiple inheritance
-~Encapsulation
+=Correct Answer~Encapsulation
 ~Immutability
 ~Garbage collection
 }
@@ -137,8 +122,7 @@ Which OO concept best explains Django mixins?
 ::OO_Q16::
 Why are destructors (__del__) rarely useful in Django?
 {
-=Object lifetimes are managed by Python and the framework
-~They are deprecated
+=Correct Answer~They are deprecated
 ~They break inheritance
 ~They cannot access attributes
 }
@@ -146,8 +130,7 @@ Why are destructors (__del__) rarely useful in Django?
 ::OO_Q17::
 Which built-in function lists an object’s methods and attributes?
 {
-=dir()
-~id()
+=Correct Answer~id()
 ~type()
 ~help()
 }
@@ -155,8 +138,7 @@ Which built-in function lists an object’s methods and attributes?
 ::OO_Q18::
 Why don’t templates usually call methods with parentheses?
 {
-=Django safely exposes attributes and callable methods
-~Methods cannot be accessed in templates
+=Correct Answer~Methods cannot be accessed in templates
 ~Templates do not support objects
 ~Parentheses are forbidden
 }
@@ -164,8 +146,7 @@ Why don’t templates usually call methods with parentheses?
 ::OO_Q19::
 Why is OO a good fit for web frameworks?
 {
-=It models reusable, stateful behavior cleanly
-~It eliminates HTTP
+=Correct Answer~It eliminates HTTP
 ~It simplifies HTML
 ~It avoids configuration
 }
@@ -173,8 +154,7 @@ Why is OO a good fit for web frameworks?
 ::OO_Q20::
 Which statement best summarizes OO in Django?
 {
-=Django uses classes and instances to structure reusable behavior
-~Django replaces object-oriented programming
+=Correct Answer~Django replaces object-oriented programming
 ~Templates manage object behavior
 ~Views are global objects
 }

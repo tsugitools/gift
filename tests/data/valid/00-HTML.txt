@@ -4,8 +4,7 @@
 &lt;a href="http://www.dr-chuck.com/page2.htm"&gt;Second Page&lt;/a&gt;
 </pre>
 {
-=The reference is an absolute reference
-~The reference is a relative reference
+=Correct Answer~The reference is a relative reference
 ~The HTML is improperly formed and there will be a syntax error
 ~The text "Second Page" is improperly placed and will not be seen
 }
@@ -13,8 +12,7 @@
 ::Q2::What do you put at the beginning of an HTML file to inform
 the browser which variant of HTML you will be using in this document?
 {
-=DOCTYPE
-~<html>
+=Correct Answer~<html>
 ~<body>
 ~<?xml version>
 ~<meta type>
@@ -24,8 +22,7 @@ the browser which variant of HTML you will be using in this document?
 ::Q3::What is the preferred tag in modern HTML to indicate that text
 is to be shown in bold format?
 {
-=strong
-~b
+=Correct Answer~b
 ~bold
 ~span
 ~<xs:bold>
@@ -34,8 +31,7 @@ is to be shown in bold format?
 ::Q4::What is the preferred tag in modern HTML to indicate that text
 is to be shown in italics format?
 {
-=em
-~i
+=Correct Answer~i
 ~italics
 ~span
 ~<xs:italics>
@@ -43,8 +39,7 @@ is to be shown in italics format?
 
 ::Q5::What organization is responsibile for standards for HTML and the web.
 {
-=World Wide Web Consortium
-~HTMLco.com
+=Correct Answer~HTMLco.com
 ~Unesco
 ~CERN
 ~NCSA
@@ -52,8 +47,7 @@ is to be shown in italics format?
 
 ::Q6::What is the HTML tag for an item in a bulletted list?
 {
-=li
-~list:item
+=Correct Answer~list:item
 ~bullet
 ~item
 ~tag
@@ -62,16 +56,14 @@ is to be shown in italics format?
 ::Q7::Which is the correct ordering of opening tags in a well formed html
 document?
 {
-=html head title body h1
-~title head html body h1
+=Correct Answer~title head html body h1
 ~body html h1 head title
 ~h1 body title head html
 }
 
 ::Q8::What is the start of an HTML comment?
 {
-=<!--
-~/*
+=Correct Answer~/*
 ~'''
 ~\#
 }
@@ -79,18 +71,17 @@ document?
 ::Q9::What is the tag that is used in a document's <head> 
 area to set the text shown in the tab of the browser or title
 bar?
-{ =title =TITLE }
+{ =Correct Answer}
 
 ::Q10::In HTML, what attribute is used to indicate text that will be
 shown if an image is not loaded or read to a user that is using a 
 screen reader?
-{ =alt =ALT}
+{ =Correct Answer}
 
 ::HTML_Q1::
 What is the primary purpose of HTML?
 {
-=To mark up text to communicate meaning and structure
-~To control page layout and styling
+=Correct Answer~To control page layout and styling
 ~To execute logic on the server
 ~To store data in a database
 }
@@ -98,8 +89,7 @@ What is the primary purpose of HTML?
 ::HTML_Q2::
 HTML was originally invented in:
 {
-=The early 1990s
-~The late 1970s
+=Correct Answer~The late 1970s
 ~The early 2000s
 ~Last Tuesday
 }
@@ -107,8 +97,7 @@ HTML was originally invented in:
 ::HTML_Q3::
 Which organization was formed to develop open web standards?
 {
-=World Wide Web Consortium (W3C)
-~Mozilla Foundation
+=Correct Answer~Mozilla Foundation
 ~Internet Engineering Task Force
 ~HTML Committee of Doom
 }
@@ -116,8 +105,7 @@ Which organization was formed to develop open web standards?
 ::HTML_Q4::
 Why does the W3C emphasize open standards?
 {
-=To avoid proprietary vendor lock-in
-~To increase browser competition
+=Correct Answer~To increase browser competition
 ~To simplify programming
 ~To make HTML harder to break
 }
@@ -125,8 +113,7 @@ Why does the W3C emphasize open standards?
 ::HTML_Q5::
 Which of the following is a basic requirement of modern, valid HTML?
 {
-=Tags must be properly closed
-~Tags must be uppercase
+=Correct Answer~Tags must be uppercase
 ~Whitespace must be exact
 ~Browsers must enforce errors
 }
@@ -134,8 +121,7 @@ Which of the following is a basic requirement of modern, valid HTML?
 ::HTML_Q6::
 Which tag represents the main visible content of an HTML page?
 {
-=<body>
-~<head>
+=Correct Answer~<head>
 ~<meta>
 ~<doctype>
 }
@@ -143,8 +129,7 @@ Which tag represents the main visible content of an HTML page?
 ::HTML_Q7::
 What is the purpose of the <head> section in an HTML document?
 {
-=To contain metadata about the page
-~To display visible content
+=Correct Answer~To display visible content
 ~To define links between pages
 ~To store JavaScript variables
 }
@@ -152,8 +137,7 @@ What is the purpose of the <head> section in an HTML document?
 ::HTML_Q8::
 When a URL points to a directory on a web server, which file is commonly loaded by default?
 {
-=index.html
-~home.html
+=Correct Answer~home.html
 ~main.htm
 ~default.txt
 }
@@ -161,8 +145,7 @@ When a URL points to a directory on a web server, which file is commonly loaded 
 ::HTML_Q9::
 Why do browsers tolerate badly formed HTML?
 {
-=To preserve backward compatibility
-~To enforce standards
+=Correct Answer~To enforce standards
 ~To improve security
 ~To reduce rendering time
 }

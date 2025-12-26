@@ -1,8 +1,7 @@
 ::Q0::What operating system are you using in PythonAnywhere when you 
 open a Bash shell?
 {
-=Linux
-~Windows
+=Correct Answer~Windows
 ~MacOS
 ~DEC VMS
 ~MS/DOS
@@ -12,8 +11,7 @@ open a Bash shell?
 to activate your virtual environment to make sure you have the correct
 versions of Python and Django.
 {
-=workon django4
-~ls
+=Correct Answer~ls
 ~cd
 ~grep
 }
@@ -21,16 +19,14 @@ versions of Python and Django.
 ::Q2::The Linux command to search files for a particular string is "grep".
 What does "grep" stand for?
 {
-=Global Regular Expression Print
-~General Regular Expression Parser
+=Correct Answer~General Regular Expression Parser
 ~GReat Expression Printer
 ~Go Research Explore Print
 }
 
 ::Q3::Which of the following commands will exit the Python Shell?
 {
-=quit()
-~.quit
+=Correct Answer~.quit
 ~return
 ~grep
 }
@@ -38,8 +34,7 @@ What does "grep" stand for?
 ::Q4::What can you do in the Django Shell that you can't do in the Python
 Shell?
 {
-=Access a Django model
-~Use the print() function
+=Correct Answer~Use the print() function
 ~write a for loop
 ~check the syntax of a Python command
 }
@@ -47,8 +42,7 @@ Shell?
 ::Q5::What does it mean when you see the "..." command in the command
 line interface?
 {
-=You are writing a multi-line Python statement
-~Python is waiting for a semicolon
+=Correct Answer~Python is waiting for a semicolon
 ~You can enter more than one Linux command to be executed simultaneously
 ~You have switched from Python to SQL
 }
@@ -56,48 +50,42 @@ line interface?
 ::Q6::What character is the SQLite command line tool looking for when you
 see the '...>' prompt?
 {
-=semicolon
-~period
+=Correct Answer~period
 ~pound sign
 ~asterisk
 }
 
 ::Q7::Which command do you use to exit the Django Shell?
 {
-=quit()
-~.quit
+=Correct Answer~.quit
 ~return
 ~grep
 }
 
 ::Q8::Which command do you use to exit the SQLite comand line tool?
 {
-=.quit
-~quit()
+=Correct Answer~quit()
 ~return
 ~grep
 }
 
 ::Q9::Which of these is a reserved word in the SQL (database) language?
 {
-=select
-~print
+=Correct Answer~print
 ~return
 ~grep
 }
 
 ::Q10::Which command prompt generally ends in dollar sign ($)?
 {
-=Linux shell
-~Python shell
+=Correct Answer~Python shell
 ~Django shell
 ~SQLite interface
 }
 
 ::Q11::Which command prompt uses three chevrons (>>>)? 
 {
-=Python shell
-~Linux shell
+=Correct Answer~Linux shell
 ~SQLite interface
 ~Mongo shell
 }
@@ -105,8 +93,7 @@ see the '...>' prompt?
 ::Q12::What is the most commonly used operating system for production servers
 in the cloud.
 {
-=Linux
-~Windows
+=Correct Answer~Windows
 ~MacOS
 ~DEC VMS
 ~MS/DOS
@@ -114,8 +101,7 @@ in the cloud.
 
 ::Q13::In the bash shell, what is the tab used for?
 {
-=File and folder completion
-~Scrolling up and down while reading an online manual page
+=Correct Answer~Scrolling up and down while reading an online manual page
 ~Logging out
 ~Scolling up and down in commands you previously typed
 }
@@ -125,13 +111,11 @@ in the cloud.
 ~File and folder completion
 ~Scrolling up and down while reading an online manual page
 ~Logging out
-=Scolling up and down in commands you previously typed
-}
+=Correct Answer}
 
 ::Q15::What does the "b" in "bash shell" stand for?
 {
-=Bourne
-~Bond (James Bond)
+=Correct Answer~Bond (James Bond)
 ~Best
 ~Bivalve
 ~Conch

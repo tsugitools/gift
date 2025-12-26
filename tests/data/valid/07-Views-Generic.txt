@@ -2,8 +2,7 @@
 ::GV_Q1::
 What problem are Django’s generic views primarily designed to solve?
 {
-=Reducing repeated boilerplate code
-~Improving database performance
+=Correct Answer~Improving database performance
 ~Replacing templates
 ~Eliminating URLs
 }
@@ -11,8 +10,7 @@ What problem are Django’s generic views primarily designed to solve?
 ::GV_Q2::
 Which design principle best explains why generic views exist?
 {
-=Don’t Repeat Yourself (DRY)
-~Separation of concerns
+=Correct Answer~Separation of concerns
 ~Loose coupling
 ~Fail fast
 }
@@ -20,8 +18,7 @@ Which design principle best explains why generic views exist?
 ::GV_Q3::
 Which Django generic view class is used to display a list of objects?
 {
-=ListView
-~DetailView
+=Correct Answer~DetailView
 ~TemplateView
 ~FormView
 }
@@ -29,8 +26,7 @@ Which Django generic view class is used to display a list of objects?
 ::GV_Q4::
 Which Django generic view class is used to display a single object?
 {
-=DetailView
-~ListView
+=Correct Answer~ListView
 ~TemplateView
 ~RedirectView
 }
@@ -38,8 +34,7 @@ Which Django generic view class is used to display a single object?
 ::GV_Q5::
 In ListView, which method is typically called first during request processing?
 {
-=get_template_names()
-~get_queryset()
+=Correct Answer~get_queryset()
 ~get_context_data()
 ~render_to_response()
 }
@@ -47,8 +42,7 @@ In ListView, which method is typically called first during request processing?
 ::GV_Q6::
 In ListView, which method is called last?
 {
-=render_to_response()
-~get_queryset()
+=Correct Answer~get_queryset()
 ~get_template_names()
 ~dispatch()
 }
@@ -56,8 +50,7 @@ In ListView, which method is called last?
 ::GV_Q7::
 In DetailView, which method is called earliest?
 {
-=dispatch()
-~get_object()
+=Correct Answer~get_object()
 ~get_queryset()
 ~render_to_response()
 }
@@ -65,8 +58,7 @@ In DetailView, which method is called earliest?
 ::GV_Q8::
 In DetailView, which method is called latest?
 {
-=render_to_response()
-~get_object()
+=Correct Answer~get_object()
 ~get_queryset()
 ~dispatch()
 }
@@ -75,8 +67,7 @@ In DetailView, which method is called latest?
 By convention, if app_name is "abc" and the model is Dog, which template will
 DetailView look for?
 {
-=templates/abc/dog_detail.html
-~templates/abc/dog.html
+=Correct Answer~templates/abc/dog.html
 ~templates/dog_detail.html
 ~templates/abc/detail_dog.html
 }
@@ -84,8 +75,7 @@ DetailView look for?
 ::GV_Q10::
 By convention, which context variable contains the objects in a Dog ListView?
 {
-=dog_list
-~dogs
+=Correct Answer~dogs
 ~dog.objects
 ~dog_queryset
 }
@@ -93,8 +83,7 @@ By convention, which context variable contains the objects in a Dog ListView?
 ::GV_Q11::
 Which class attribute overrides the template selected by convention?
 {
-=template_name
-~template
+=Correct Answer~template
 ~template_override
 ~render_template
 }
@@ -106,8 +95,7 @@ class ArticleListView(ListView):
 </pre>
 what does ListView represent?
 {
-=The class being extended
-~The class being created
+=Correct Answer~The class being created
 ~A function call
 ~A template name
 }
@@ -115,8 +103,7 @@ what does ListView represent?
 ::GV_Q13::
 In the same definition, what does ArticleListView represent?
 {
-=The class being created
-~The class being extended
+=Correct Answer~The class being extended
 ~A URL pattern
 ~A template variable
 }
@@ -124,8 +111,7 @@ In the same definition, what does ArticleListView represent?
 ::GV_Q14::
 Where is the actual implementation of TemplateView located?
 {
-=In Django’s source code
-~In views.py
+=Correct Answer~In views.py
 ~In urls.py
 ~In settings.py
 }
@@ -133,8 +119,7 @@ Where is the actual implementation of TemplateView located?
 ::GV_Q15::
 What does the model attribute in a generic view specify?
 {
-=Which database table the view operates on
-~Which template to render
+=Correct Answer~Which template to render
 ~Which URL to match
 ~Which HTTP methods are allowed
 }
@@ -142,8 +127,7 @@ What does the model attribute in a generic view specify?
 ::GV_Q16::
 Why does Django use “convention over configuration”?
 {
-=To reduce decisions and boilerplate
-~To hide configuration options
+=Correct Answer~To hide configuration options
 ~To improve security
 ~To simplify databases
 }
@@ -151,8 +135,7 @@ Why does Django use “convention over configuration”?
 ::GV_Q17::
 Which method would you override to change which objects are retrieved?
 {
-=get_queryset()
-~get_template_names()
+=Correct Answer~get_template_names()
 ~render_to_response()
 ~dispatch()
 }
@@ -160,8 +143,7 @@ Which method would you override to change which objects are retrieved?
 ::GV_Q18::
 Which method would you override to add extra data to the template context?
 {
-=get_context_data()
-~get_queryset()
+=Correct Answer~get_queryset()
 ~dispatch()
 ~get_template_names()
 }
@@ -169,8 +151,7 @@ Which method would you override to add extra data to the template context?
 ::GV_Q19::
 Which statement best describes what generic views provide?
 {
-=Common patterns wrapped in reusable abstractions
-~A replacement for templates
+=Correct Answer~A replacement for templates
 ~Automatic form handling only
 ~A shortcut around MVC
 }
@@ -178,8 +159,7 @@ Which statement best describes what generic views provide?
 ::GV_Q20::
 Which is a valid reason to override generic view behavior?
 {
-=When default conventions do not match your needs
-~To avoid using models
+=Correct Answer~To avoid using models
 ~To eliminate templates
 ~To bypass URL routing
 }

@@ -3,8 +3,7 @@
 ::HTTP_Q1::
 When a browser retrieves a web page using HTTP, which TCP port is used by default?
 {
-=80
-~25
+=Correct Answer~25
 ~110
 ~443
 }
@@ -12,8 +11,7 @@ When a browser retrieves a web page using HTTP, which TCP port is used by defaul
 ::HTTP_Q2::
 What HTTP method is normally used by a browser to retrieve a web page?
 {
-=GET
-~POST
+=Correct Answer~POST
 ~PUT
 ~DELETE
 }
@@ -21,8 +19,7 @@ What HTTP method is normally used by a browser to retrieve a web page?
 ::HTTP_Q3::
 In HTTP, what does the second “T” stand for?
 {
-=Transfer
-~Transport
+=Correct Answer~Transport
 ~Transaction
 ~Time
 }
@@ -30,8 +27,7 @@ In HTTP, what does the second “T” stand for?
 ::HTTP_Q4::
 Which of the following is NOT a part of a Uniform Resource Locator (URL)?
 {
-=Operating system
-~Protocol
+=Correct Answer~Protocol
 ~Host
 ~Document path
 }
@@ -39,8 +35,7 @@ Which of the following is NOT a part of a Uniform Resource Locator (URL)?
 ::HTTP_Q5::
 Which HTML tag most commonly causes the browser to make an HTTP request when clicked?
 {
-=a
-~img
+=Correct Answer~img
 ~div
 ~p
 }
@@ -48,8 +43,7 @@ Which HTML tag most commonly causes the browser to make an HTTP request when cli
 ::HTTP_Q6::
 Which organization develops and publishes Internet protocol standards?
 {
-=Internet Engineering Task Force (IETF)
-~World Wide Web Consortium (W3C)
+=Correct Answer~World Wide Web Consortium (W3C)
 ~ISO
 ~Educause
 }
@@ -57,8 +51,7 @@ Which organization develops and publishes Internet protocol standards?
 ::HTTP_Q7::
 Which HTTP response header tells the browser how to interpret the returned content?
 {
-=Content-Type
-~Content-Length
+=Correct Answer~Content-Length
 ~ETag
 ~Location
 }
@@ -66,8 +59,7 @@ Which HTTP response header tells the browser how to interpret the returned conte
 ::HTTP_Q8::
 Which statement best describes an Internet socket?
 {
-=An endpoint for two-way network communication
-~A physical network cable
+=Correct Answer~A physical network cable
 ~A browser feature
 ~A temporary file on disk
 }
@@ -75,8 +67,7 @@ Which statement best describes an Internet socket?
 ::HTTP_Q9::
 What must exist before a client can successfully open a socket connection?
 {
-=A server listening on a port
-~A matching client program
+=Correct Answer~A matching client program
 ~A shared filesystem
 ~A database connection
 }
@@ -84,8 +75,7 @@ What must exist before a client can successfully open a socket connection?
 ::HTTP_Q10::
 Which TCP port is used by Simple Mail Transfer Protocol (SMTP)?
 {
-=25
-~80
+=Correct Answer~80
 ~110
 ~443
 }
@@ -93,8 +83,7 @@ Which TCP port is used by Simple Mail Transfer Protocol (SMTP)?
 ::HTTP_Q11::
 Which TCP port is used by default for HTTPS?
 {
-=443
-~80
+=Correct Answer~80
 ~25
 ~8080
 }
@@ -102,8 +91,7 @@ Which TCP port is used by default for HTTPS?
 ::HTTP_Q12::
 RFC 2616 primarily describes which protocol?
 {
-=HTTP
-~FTP
+=Correct Answer~FTP
 ~SMTP
 ~POP3
 }
@@ -111,8 +99,7 @@ RFC 2616 primarily describes which protocol?
 ::HTTP_Q13::
 What is the basic sequence of an HTTP interaction?
 {
-=Connect, request, response, close
-~Request, authenticate, encrypt, store
+=Correct Answer~Request, authenticate, encrypt, store
 ~Send data, wait, retry, timeout
 ~Open socket, write file, close file
 }
@@ -120,8 +107,7 @@ What is the basic sequence of an HTTP interaction?
 ::HTTP_Q14::
 In an HTTP request line, which part specifies the resource being requested?
 {
-=Request-URI
-~HTTP version
+=Correct Answer~HTTP version
 ~Method name
 ~Header block
 }
@@ -129,8 +115,7 @@ In an HTTP request line, which part specifies the resource being requested?
 ::HTTP_Q15::
 Why does the socket code call encode() before sending data?
 {
-=Sockets transmit bytes, not strings
-~To compress the data
+=Correct Answer~To compress the data
 ~To encrypt the request
 ~To validate the URL
 }
@@ -138,8 +123,7 @@ Why does the socket code call encode() before sending data?
 ::HTTP_Q16::
 Which of the following is NOT typically visible in browser developer tools?
 {
-=Server-side application code
-~Request headers
+=Correct Answer~Request headers
 ~Response headers
 ~HTTP status codes
 }
@@ -147,8 +131,7 @@ Which of the following is NOT typically visible in browser developer tools?
 ::HTTP_Q17::
 In the sample server.py code, which function waits for incoming connections?
 {
-=accept()
-~bind()
+=Correct Answer~bind()
 ~listen()
 ~recv()
 }
@@ -156,8 +139,7 @@ In the sample server.py code, which function waits for incoming connections?
 ::HTTP_Q18::
 In the sample server.py code, which function will fail if the port is already in use?
 {
-=bind()
-~listen()
+=Correct Answer~listen()
 ~accept()
 ~recv()
 }
@@ -165,8 +147,7 @@ In the sample server.py code, which function will fail if the port is already in
 ::HTTP_Q19::
 Which Python library makes HTTP requests easiest for beginners?
 {
-=urllib
-~socket
+=Correct Answer~socket
 ~re
 ~json
 }
@@ -174,8 +155,7 @@ Which Python library makes HTTP requests easiest for beginners?
 ::HTTP_Q20::
 Why can JavaScript running in a browser not directly open raw sockets?
 {
-=For security reasons enforced by the browser
-~Because JavaScript lacks networking support
+=Correct Answer~Because JavaScript lacks networking support
 ~Because sockets require administrator privileges
 ~Because HTTP replaced sockets
 }

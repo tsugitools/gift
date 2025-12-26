@@ -2,8 +2,7 @@
 ::CSS_Q1::
 What is the primary purpose of Cascading Style Sheets (CSS)?
 {
-=To control the visual presentation of HTML content
-~To store data on the server
+=Correct Answer~To store data on the server
 ~To execute business logic
 ~To replace HTML entirely
 }
@@ -11,8 +10,7 @@ What is the primary purpose of Cascading Style Sheets (CSS)?
 ::CSS_Q2::
 Which concept best describes the relationship between HTML and CSS?
 {
-=Separation of concerns
-~Mutual recursion
+=Correct Answer~Mutual recursion
 ~Tight coupling
 ~Undefined behavior
 }
@@ -20,8 +18,7 @@ Which concept best describes the relationship between HTML and CSS?
 ::CSS_Q3::
 In a CSS rule, the selector specifies:
 {
-=Which elements the rule applies to
-~Which browser is supported
+=Correct Answer~Which browser is supported
 ~Which file the rule lives in
 ~Which developer wrote it
 }
@@ -29,8 +26,7 @@ In a CSS rule, the selector specifies:
 ::CSS_Q4::
 In the following rule, what is "font-family"?
 {
-=A property
-~A selector
+=Correct Answer~A selector
 ~A value
 ~A comment
 }
@@ -38,8 +34,7 @@ In the following rule, what is "font-family"?
 ::CSS_Q5::
 Which of the following is NOT part of valid CSS rule syntax?
 {
-=Curly braces
-~Property–value pairs
+=Correct Answer~Property–value pairs
 ~Semicolons
 ~Closing HTML tags
 }
@@ -47,8 +42,7 @@ Which of the following is NOT part of valid CSS rule syntax?
 ::CSS_Q6::
 Which tag was introduced to provide an inline element with no default styling?
 {
-=span
-~p
+=Correct Answer~p
 ~strong
 ~blink
 }
@@ -56,8 +50,7 @@ Which tag was introduced to provide an inline element with no default styling?
 ::CSS_Q7::
 Which tag provides an unstyled block-level container?
 {
-=div
-~table
+=Correct Answer~table
 ~section
 ~blockquote
 }
@@ -65,8 +58,7 @@ Which tag provides an unstyled block-level container?
 ::CSS_Q8::
 Which of the following is a valid way to apply CSS?
 {
-=Inline styles, embedded styles, or external stylesheets
-~Only inline styles
+=Correct Answer~Only inline styles
 ~Only external stylesheets
 ~JavaScript injection
 }
@@ -74,8 +66,7 @@ Which of the following is a valid way to apply CSS?
 ::CSS_Q9::
 Where is an external CSS file typically linked in an HTML document?
 {
-=Inside the <head> element
-~At the end of the <body>
+=Correct Answer~At the end of the <body>
 ~Inside the <div>
 ~Inside a comment
 }
@@ -83,8 +74,7 @@ Where is an external CSS file typically linked in an HTML document?
 ::CSS_Q10::
 Which of the following color values represents pure red?
 {
-=#ff0000
-~#00ff00
+=Correct Answer~#00ff00
 ~#0000ff
 ~#ffffff
 }
@@ -92,8 +82,7 @@ Which of the following color values represents pure red?
 ::CSS_Q11::
 Why are hexadecimal color values commonly used in CSS?
 {
-=They map directly to RGB values
-~They compress better in HTTP
+=Correct Answer~They compress better in HTTP
 ~Browsers require them
 ~They are easier to pronounce
 }
@@ -101,8 +90,7 @@ Why are hexadecimal color values commonly used in CSS?
 ::CSS_Q12::
 How many official color names does the W3C define that validate in HTML/CSS?
 {
-=16
-~8
+=Correct Answer~8
 ~42
 ~256
 }
@@ -110,8 +98,7 @@ How many official color names does the W3C define that validate in HTML/CSS?
 ::CSS_Q13::
 Which font-family declaration best follows recommended practice?
 {
-="Trebuchet MS", Helvetica, Arial, sans-serif
-~"Comic Sans MS", fantasy
+=Correct Answer~"Comic Sans MS", fantasy
 ~Times New Roman only
 ~default
 }
@@ -119,8 +106,7 @@ Which font-family declaration best follows recommended practice?
 ::CSS_Q14::
 Why are sans-serif fonts often preferred for screen display?
 {
-=They are easier to read on screens
-~They load faster
+=Correct Answer~They load faster
 ~They use fewer pixels
 ~They were invented later
 }
@@ -128,8 +114,7 @@ Why are sans-serif fonts often preferred for screen display?
 ::CSS_Q15::
 Which CSS property controls the space *inside* an element’s border?
 {
-=padding
-~margin
+=Correct Answer~margin
 ~border-width
 ~float
 }
@@ -137,8 +122,7 @@ Which CSS property controls the space *inside* an element’s border?
 ::CSS_Q16::
 Which CSS property controls the space *outside* an element’s border?
 {
-=margin
-~padding
+=Correct Answer~padding
 ~border-style
 ~position
 }
@@ -146,8 +130,7 @@ Which CSS property controls the space *outside* an element’s border?
 ::CSS_Q17::
 Which pseudo-class applies when a user moves the mouse over a link?
 {
-=:hover
-~:active
+=Correct Answer~:active
 ~:visited
 ~:focus
 }
@@ -155,8 +138,7 @@ Which pseudo-class applies when a user moves the mouse over a link?
 ::CSS_Q18::
 Which pseudo-class applies after a link has already been clicked?
 {
-=:visited
-~:hover
+=Correct Answer~:hover
 ~:active
 ~:link
 }
@@ -164,16 +146,13 @@ Which pseudo-class applies after a link has already been clicked?
 ::CSS_Q19::
 What does the CSS "float" property primarily affect?
 {
-=How elements flow around each other
-~Their stacking order
+=Correct Answer~Their stacking order
 ~Their font size
 ~Their opacity
 }
 
 ::Q20::Which of the following is not a way to include CSS in an HTML page?
 {
-=Using the <font> tag to enclose other tags
-~External Style Sheet
-~Directly on an HTML tag using the style\= attribute
-~Using the <style> tag inline in the HTML document
+=Correct Answer~External Style Sheet
+~Directly on an HTML tag using the style\=Correct Answer~Using the <style> tag inline in the HTML document
 }
