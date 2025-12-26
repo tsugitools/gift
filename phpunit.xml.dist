@@ -1,8 +1,27 @@
-<phpunit>
+<phpunit bootstrap="tests/bootstrap.php" colors="true" verbose="true">
     <testsuites>
         <testsuite name="Gift Test Suite">
             <directory>tests/*</directory>
-            <!-- <exclude>mod/php-intro/lib</exclude> -->
+        </testsuite>
+        <testsuite name="Parser Tests">
+            <directory>tests/Parser</directory>
+        </testsuite>
+        <testsuite name="All Tests">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">.</directory>
+            <exclude>
+                <directory>tests</directory>
+                <directory>vendor</directory>
+                <directory>old</directory>
+                <directory>export_old</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="tests/coverage"/>
+    </logging>
 </phpunit>

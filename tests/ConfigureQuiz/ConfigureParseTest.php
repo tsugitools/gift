@@ -3,9 +3,9 @@
 require_once "configure_parse.php";
 require_once "parse.php";
 
-class ConfigureTest extends PHPUnit_Framework_TestCase
+class ConfigureParseTest extends \PHPUnit\Framework\TestCase
 {
-  public function setUp() {
+  public function setUp(): void {
     // create a test post
     $_POST = Array
     (

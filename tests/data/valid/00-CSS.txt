@@ -1,0 +1,179 @@
+// CSS
+::CSS_Q1::
+What is the primary purpose of Cascading Style Sheets (CSS)?
+{
+=To control the visual presentation of HTML content
+~To store data on the server
+~To execute business logic
+~To replace HTML entirely
+}
+
+::CSS_Q2::
+Which concept best describes the relationship between HTML and CSS?
+{
+=Separation of concerns
+~Mutual recursion
+~Tight coupling
+~Undefined behavior
+}
+
+::CSS_Q3::
+In a CSS rule, the selector specifies:
+{
+=Which elements the rule applies to
+~Which browser is supported
+~Which file the rule lives in
+~Which developer wrote it
+}
+
+::CSS_Q4::
+In the following rule, what is "font-family"?
+{
+=A property
+~A selector
+~A value
+~A comment
+}
+
+::CSS_Q5::
+Which of the following is NOT part of valid CSS rule syntax?
+{
+=Curly braces
+~Property–value pairs
+~Semicolons
+~Closing HTML tags
+}
+
+::CSS_Q6::
+Which tag was introduced to provide an inline element with no default styling?
+{
+=span
+~p
+~strong
+~blink
+}
+
+::CSS_Q7::
+Which tag provides an unstyled block-level container?
+{
+=div
+~table
+~section
+~blockquote
+}
+
+::CSS_Q8::
+Which of the following is a valid way to apply CSS?
+{
+=Inline styles, embedded styles, or external stylesheets
+~Only inline styles
+~Only external stylesheets
+~JavaScript injection
+}
+
+::CSS_Q9::
+Where is an external CSS file typically linked in an HTML document?
+{
+=Inside the <head> element
+~At the end of the <body>
+~Inside the <div>
+~Inside a comment
+}
+
+::CSS_Q10::
+Which of the following color values represents pure red?
+{
+=#ff0000
+~#00ff00
+~#0000ff
+~#ffffff
+}
+
+::CSS_Q11::
+Why are hexadecimal color values commonly used in CSS?
+{
+=They map directly to RGB values
+~They compress better in HTTP
+~Browsers require them
+~They are easier to pronounce
+}
+
+::CSS_Q12::
+How many official color names does the W3C define that validate in HTML/CSS?
+{
+=16
+~8
+~42
+~256
+}
+
+::CSS_Q13::
+Which font-family declaration best follows recommended practice?
+{
+="Trebuchet MS", Helvetica, Arial, sans-serif
+~"Comic Sans MS", fantasy
+~Times New Roman only
+~default
+}
+
+::CSS_Q14::
+Why are sans-serif fonts often preferred for screen display?
+{
+=They are easier to read on screens
+~They load faster
+~They use fewer pixels
+~They were invented later
+}
+
+::CSS_Q15::
+Which CSS property controls the space *inside* an element’s border?
+{
+=padding
+~margin
+~border-width
+~float
+}
+
+::CSS_Q16::
+Which CSS property controls the space *outside* an element’s border?
+{
+=margin
+~padding
+~border-style
+~position
+}
+
+::CSS_Q17::
+Which pseudo-class applies when a user moves the mouse over a link?
+{
+=:hover
+~:active
+~:visited
+~:focus
+}
+
+::CSS_Q18::
+Which pseudo-class applies after a link has already been clicked?
+{
+=:visited
+~:hover
+~:active
+~:link
+}
+
+::CSS_Q19::
+What does the CSS "float" property primarily affect?
+{
+=How elements flow around each other
+~Their stacking order
+~Their font size
+~Their opacity
+}
+
+::Q20::Which of the following is not a way to include CSS in an HTML page?
+{
+=Using the <font> tag to enclose other tags
+~External Style Sheet
+~Directly on an HTML tag using the style\= attribute
+~Using the <style> tag inline in the HTML document
+}

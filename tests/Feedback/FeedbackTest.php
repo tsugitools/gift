@@ -1,9 +1,9 @@
 <?php
 
-require_once "parse.php";
-require_once "..\..\\vendor\\tsugi\lib\src\Util\Mersenne_Twister.php";
+require_once __DIR__ . "/../../parse.php";
+// Mersenne_Twister is only needed for make_quiz, not for parse_gift tests
 
-class FeedbackTest extends PHPUnit_Framework_TestCase
+class FeedbackTest extends \PHPUnit\Framework\TestCase
 {
   public function testQuestionWithFeedback() {
     // Check a valid string
@@ -19,16 +19,25 @@ class FeedbackTest extends PHPUnit_Framework_TestCase
     $this->assertEquals($questions[0]->parsed_answer[0][2], "You got it wrong.");
     $this->assertEquals($questions[0]->parsed_answer[1][2], "You got it.");
 
-    // Check a string without properly formed feedback
+    // Check a string with single feedback (now valid in Moodle GIFT format)
     $gift = "::Q1 T/F:: 1+1=2 {T#You got it.}";
     $questions = array();
     $errors = array();
     parse_gift($gift, $questions, $errors);
-    // we should get an error indicating that there was an issue with the feedback...
-    $this->assertTrue(strpos($errors[0], "malformed True/False feedback") === 0);
-
-    // but the rest of the question should still parse
+    // Single feedback for T/F is now valid - should parse successfully
+    $this->assertEmpty($errors, "Single feedback T/F should parse without errors");
     $this->assertEquals($questions[0]->question, "1+1=2");
     $this->assertEquals($questions[0]->type, "true_false_question");
+    
+    // Verify feedback is present
+    $hasFeedback = false;
+    foreach ($questions[0]->parsed_answer as $ans) {
+        if ($ans[0] === true && strlen($ans[2]) > 0) {
+            $hasFeedback = true;
+            $this->assertEquals("You got it.", $ans[2]);
+            break;
+        }
+    }
+    $this->assertTrue($hasFeedback, "Should have feedback on correct answer");
   }
 }

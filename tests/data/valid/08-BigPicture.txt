@@ -1,0 +1,180 @@
+::BP_Q1::
+At the highest level, a Django web application exists to:
+{
+=Respond to browser requests with dynamically generated responses
+~Render HTML files directly from disk
+~Replace the browser
+~Store data permanently
+}
+
+::BP_Q2::
+Which component initiates almost every interaction in a Django application?
+{
+=Browser
+~Database
+~Template
+~Middleware
+}
+
+::BP_Q3::
+When a user clicks a link in the browser, what happens first on the server?
+{
+=Django receives an HTTP request
+~A template is rendered
+~A database query runs
+~A response is sent
+}
+
+::BP_Q4::
+Which file is consulted first to decide what code handles a request?
+{
+=urls.py
+~views.py
+~models.py
+~settings.py
+}
+
+::BP_Q5::
+What is the primary responsibility of URL routing?
+{
+=Map URLs to view code
+~Render templates
+~Validate user input
+~Store session data
+}
+
+::BP_Q6::
+What is the primary responsibility of a Django view?
+{
+=Coordinate request handling and produce a response
+~Store data
+~Render CSS
+~Parse URLs
+}
+
+::BP_Q7::
+Which component is responsible for persistent data storage?
+{
+=Models
+~Views
+~Templates
+~Forms
+}
+
+::BP_Q8::
+What role do templates play in the big picture?
+{
+=Generate presentation output (usually HTML)
+~Handle business logic
+~Validate input
+~Route requests
+}
+
+::BP_Q9::
+Why is Django described as following MVC concepts?
+{
+=Responsibilities are separated into data, logic, and presentation
+~It enforces strict file locations
+~It eliminates JavaScript
+~It uses controllers explicitly
+}
+
+::BP_Q10::
+Which Django file most closely represents the “controller” role?
+{
+=views.py
+~models.py
+~templates
+~settings.py
+}
+
+::BP_Q11::
+Which Django file contains configuration that affects the entire project?
+{
+=settings.py
+~views.py
+~urls.py
+~models.py
+}
+
+::BP_Q12::
+What is the purpose of forms.py in the application flow?
+{
+=Handle input validation and mapping to Python or models
+~Render HTML directly
+~Store session data
+~Define URL patterns
+}
+
+::BP_Q13::
+Why is routing kept separate from views?
+{
+=To decouple URLs from implementation details
+~To improve database performance
+~To simplify templates
+~To reduce HTML size
+}
+
+::BP_Q14::
+What does Django’s WSGI configuration primarily do?
+{
+=Connect Django to a web server
+~Render templates
+~Process forms
+~Handle authentication
+}
+
+::BP_Q15::
+Which component determines *which* template is rendered?
+{
+=View
+~Template
+~URL configuration
+~Model
+}
+
+::BP_Q16::
+Why is using named URL patterns considered best practice?
+{
+=They reduce duplication and make refactoring safer
+~They improve performance
+~They hide URLs from users
+~They eliminate routing logic
+}
+
+::BP_Q17::
+What happens after a view finishes processing a request?
+{
+=An HTTP response is returned to the browser
+~The database commits automatically
+~Templates take over routing
+~The session is destroyed
+}
+
+::BP_Q18::
+Which component should contain the least amount of logic?
+{
+=Templates
+~Views
+~Forms
+~Models
+}
+
+::BP_Q19::
+Why is the “big picture” important when debugging Django applications?
+{
+=Problems often occur at the boundaries between components
+~Errors only occur in templates
+~Django hides all errors
+~The database always fails first
+}
+
+::BP_Q20::
+Which statement best summarizes the Django big picture?
+{
+=A request flows through routing, views, models, and templates to produce a response
+~Templates control the entire application
+~Models generate responses directly
+~URLs execute database queries
+}
+
