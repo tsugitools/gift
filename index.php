@@ -74,17 +74,8 @@ if ( strlen($gift) > 0 ) {
     parse_gift($gift, $questions, $errors);
 }
 
-// TODO: Remove this sometime after 2024-09-17
-// Load the previous attempt
-$attempt = json_decode($RESULT->getJson());
 $when = 0;
 $tries = 0;
-if ( $attempt && is_object($attempt) ) {
-    if ( isset($attempt->when) ) $when = $attempt->when + 0;
-    if ( isset($attempt->tries) ) $tries = $attempt->tries + 0;
-}
-
-// TODO: Trust this sometime after 2024-09-17
 if ( $tries == 0 && method_exists($RESULT, 'getAttempts') ) {
     $attempts = $RESULT->getAttempts();
     if ( is_object($attempts) ) {
@@ -166,20 +157,10 @@ $files = get_quiz_files();
 if ( $USER->instructor ) {
     $menu = new \Tsugi\UI\MenuSet();
     $menu->addLeft('Student Data', 'grades.php');
-    /*
-    $menu->addRight('Edit Quiz', 'configure');
-    if ( $files && count($files) > 1 ) $menu->addRight('Load Quiz', 'old_configure.php');
-    $menu->addRight('Export', 'export');
-    if ( $CFG->launchactivity ) {
-        $menu->addRight('Analytics', 'analytics');
-    }
-    $menu->addRight('Settings', '#', push false, SettingsForm::attr());
-    */
-
 
     $submenu = new \Tsugi\UI\Menu();
     $submenu->addLink('Settings', '#', /* push */ false, SettingsForm::attr());
-    if ( $files && count($files) > 1 ) $submenu->addLink('Load Quiz', 'old_configure.php');
+    if ( $files && count($files) >= 1 ) $submenu->addLink('Load Quiz', 'old_configure.php');
     $submenu->addLink('Edit Quiz', 'configure');
     $submenu->addLink('Export QTI', 'export.php');
     $submenu->addLink('Print', 'index?print=yes', /* push */ false, 'target="_blank"');
