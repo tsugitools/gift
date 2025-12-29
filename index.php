@@ -79,8 +79,10 @@ $tries = 0;
 if ( $tries == 0 && method_exists($RESULT, 'getAttempts') ) {
     $attempts = $RESULT->getAttempts();
     if ( is_object($attempts) ) {
-        $when = $attempts->attempted_at ?? $when;
-        $tries = $attempts->attempts ?? $tries;
+        $when_raw = $attempts->attempted_at ?? $when;
+        if ( is_numeric($when_raw) ) $when = $when_raw + 0;
+        $tries_raw = $attempts->attempts ?? $tries;
+        if ( is_numeric($tries_raw) ) $tries = $tries_raw + 0;
     }
 }
 
