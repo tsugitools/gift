@@ -165,7 +165,7 @@ if ( $USER->instructor ) {
     if ( $files && count($files) >= 1 ) $submenu->addLink('Load Quiz', 'old_configure.php');
     $submenu->addLink('Edit Quiz', 'configure');
     $submenu->addLink('Export QTI', 'export.php');
-    $submenu->addLink('Print', 'index?print=yes', /* push */ false, 'target="_blank"');
+    $submenu->addLink('Print', 'index?print=yes', /* push */ false, 'target="_blank" rel="noopener noreferrer" aria-label="Print quiz (opens in new tab)"');
     $submenu->addLink('Send Grade', 'sendgrade.php');
 
     if ( $CFG->launchactivity ) {
@@ -213,9 +213,9 @@ unlock this assignment.
 </p>
 <p>
 <form method="post">
-    Password:
-    <input type="password" name="password">
-    <input type="submit">
+    <label for="quiz_password">Password:</label>
+    <input type="password" name="password" id="quiz_password">
+    <input type="submit" value="<?= htmlspecialchars(__('Submit')) ?>">
 </form>
 <?php
     $OUTPUT->footer();
@@ -268,12 +268,12 @@ $errors = array();
 parse_gift($gift, $questions, $errors);
 
 ?>
-<form method="post">
-<ol id="quiz">
+<form method="post" aria-label="Quiz questions">
+<ol id="quiz" role="list">
 </ol>
 <?php
 if ( ! $do_print && ( $ok || $USER->instructor ) ) {
-    echo('<input type="submit">'."\n");
+    echo('<input type="submit" value="'.htmlspecialchars(__('Submit quiz')).'">'."\n");
 }
 ?>
 </form>
